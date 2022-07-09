@@ -1,5 +1,12 @@
 package util;
 
+import jdk.swing.interop.SwingInterOpUtils;
+import model.Order;
+import model.User;
+
+import javax.print.DocFlavor;
+import java.time.Instant;
+import java.util.List;
 import java.util.Scanner;
 
 public class AppUtils {
@@ -81,5 +88,31 @@ public class AppUtils {
             return true;
         }
         return false;
+    }
+    public static void bill(List<Order> list){
+        System.out.println("YUL BOOKs STORE");
+        System.out.println("28 Nguyen Tri Phuong");
+        System.out.println("Mobile: 0962435396 - 01642156169");
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("ORDER BILL");
+        System.out.printf("%s%d","Bill No.",System.currentTimeMillis()/10000);
+        System.out.printf("%s%s","Create at",InstantUtils.instantToString(Instant.now()));
+        System.out.printf("%s%s","User Order",callUser().getUserName());
+        System.out.printf("%s%s","Cashier","ADMIN");
+        System.out.printf("%s%s%s%s","Product Name","Amount","Price","Total");
+        double resul =0;
+        for (Order order : list){
+            System.out.printf("%-30s%-30s%-10s%-40s",order.getProductName(),order.getQuaility(),order.getPrice(),(order.getQuaility()*order.getPrice()));
+            resul+=(order.getQuaility()* order.getPrice());
+        }
+        System.out.println("RESULT:          " + InstantUtils.doubleToVND(resul));
+    }
+    public static User callUser(){
+        User user = null ;
+        List<String> record = CSVUtils.read("src\\data\\login.csv");
+        for (String s : record) {
+            user = User.parseUser(s);
+        }
+        return user;
     }
 }

@@ -3,6 +3,7 @@ package views;
 import model.Order;
 import model.Product;
 import service.OrderItemService;
+import service.ProduceService;
 import util.AppUtils;
 import util.InstantUtils;
 
@@ -14,6 +15,7 @@ public class OrderItemView {
     OrderItemService orderItemService;
     public void menuOrder(){
         orderItemService = OrderItemService.getInstance();
+        ProduceService produceService = ProduceService.getInstance();
         int chose;
         do {
             System.out.println("==================== Order Item MANAGEMENT ======================");
@@ -29,12 +31,10 @@ public class OrderItemView {
             chose = AppUtils.choseAgain(1,8);
             switch (chose){
                 case 1:
-                    showListProduct(orderItemService.findAllProduct());
+                    produceService.showListProduct(orderItemService.findAllProduct());
                     break;
                 case 2:
-                    for (Order order : orderItemService.findAllOrder()){
-                        System.out.println(InstantUtils.orderFomat(order));
-                    }
+                    orderItemService.showOrderList();
                     break;
                 case 3:
                     System.out.println("Enter Name product want to find: ");
@@ -61,10 +61,10 @@ public class OrderItemView {
         }while (chose!=8);
     }
 
-    public static void showListProduct(List<Product> list) {
-        System.out.printf("%-58s%-78s%-58s%-48s%-48s%-48s\n","ID","Name","Author","Quaility","Price","Create At\n");
-        for (Product product : list) {
-            System.out.println(InstantUtils.productFomat(product));
-        }
-    }
+//    public static void showListProduct(List<Product> list) {
+//        System.out.printf("%-58s%-78s%-58s%-48s%-48s%-48s\n","ID","Name","Author","Quaility","Price","Create At\n");
+//        for (Product product : list) {
+//            System.out.println(InstantUtils.productFomat(product));
+//        }
+//    }
 }

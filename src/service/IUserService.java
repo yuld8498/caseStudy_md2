@@ -5,7 +5,11 @@ import model.User;
 import java.util.List;
 
 public interface IUserService {
+    void findUserByName(String name);
+    User createUser();
     List<User> findAll();
+    void sortByIDESC();
+    void sortByIDASC();
 
     User loginUser(String userName, String password);
 

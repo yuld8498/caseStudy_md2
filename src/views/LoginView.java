@@ -27,19 +27,31 @@ public class LoginView {
             chose = AppUtils.choseAgain(1,4);
             switch (chose){
                 case 1:
-                    if (loginAdmin()){
-                        AdminView adminView = new AdminView();
-                        adminView.menuAdmin();
-                    }
+                    boolean repeatLoginAdmin =false;
+                    do {
+                        if (loginAdmin()){
+                            AdminView adminView = new AdminView();
+                            adminView.menuAdmin();
+                        }else {
+                            repeatLoginAdmin=AppUtils.areYouSure("Login again");
+                        }
+                    }while (repeatLoginAdmin);
                     break;
                 case 2:
-                    if (loginUser()){
-                        UserView userView = new UserView();
-                        userView.showMenu();
-                    }
+                    boolean repeatLoginUser =false;
+                    do {
+                        if (loginUser()){
+                            UserView userView = new UserView();
+                            userView.showMenu();
+                        }else {
+                            repeatLoginUser = AppUtils.areYouSure("Login again");
+                        }
+                    }while (repeatLoginUser);
                     break;
                 case 3:
-                    userService.addNewUser(createUser());
+                    do {
+                        userService.addNewUser(createUser());
+                    }while (AppUtils.areYouSure("Create more User"));
                     break;
             }
         }while (chose!=4);
@@ -61,8 +73,9 @@ public class LoginView {
         return false;
     }
     public boolean loginUser(){
-        System.out.println("Enter Admin Username");
+        System.out.println("Enter  Username");
         String User = AppUtils.inputStringAgain("Admin Username");
+        System.out.println("Enter password: ");
         String password = AppUtils.inputStringAgain("Password");
         for (User user : userService.findAll()){
             if (user.getPassword().equals(password)&&user.getUserName().equals(User)&&user.getROLE().equalsIgnoreCase("user")){
@@ -72,6 +85,7 @@ public class LoginView {
                 return true;
             }
         }
+        System.out.println("UserName or PassWord is wrong, please check again.");
         return false;
     }
     public static User callUser(){

@@ -78,6 +78,7 @@ public class OrderItemService implements IOrderItemService {
                     order.setAddressOfUser(callUser().getAddress());
                     order.setPhoneNumberOfUser(callUser().getMobile());
                     order.setCreateAt(Instant.now());
+                    order.setNote("Order");
                     list.add(order);
                     CSVUtils.write(PATHORDER,list);
                     return order;
@@ -99,7 +100,9 @@ public class OrderItemService implements IOrderItemService {
     @Override
     public void showOrderList() {
         for (Order order : findAllOrder()) {
-            System.out.println(order.toString());
+            if ((order.getNote().equalsIgnoreCase("order")&&order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName()))||callUser().getROLE().equalsIgnoreCase("Admin")){
+                System.out.println(order.toString());
+            }
         }
     }
 
@@ -107,7 +110,7 @@ public class OrderItemService implements IOrderItemService {
     public void deleteProductInListByID(Long ID) {
         List<Order> list = new ArrayList<>(findAllOrder());
         for (Order order : list) {
-            if (order.getID().equals(ID)) {
+            if (order.getID().equals(ID)&& order.getNote().equalsIgnoreCase("order")) {
                 if (AppUtils.areYouSure("Delete product in order list")) {
                     list.remove(order);
                     CSVUtils.write(PATHORDER, list);
@@ -122,9 +125,15 @@ public class OrderItemService implements IOrderItemService {
 
     @Override
     public void clearOrderList() {
-        List<Order> list = new ArrayList<>();
+        List<Order> newlist = new ArrayList<>();
+        List<Order> list = new ArrayList<>(findAllOrder());
+        for (Order order : list){
+            if (order.getNote().equalsIgnoreCase("loan")){
+                newlist.add(order);
+            }
+        }
         if (AppUtils.areYouSure("Clear order list")) {
-            CSVUtils.write(PATHORDER, list);
+            CSVUtils.write(PATHORDER, newlist);
             System.out.println("List order is clear.");
         } else {
             System.out.println("Clear order list is cancel.");
@@ -133,19 +142,5 @@ public class OrderItemService implements IOrderItemService {
 
     @Override
     public void confirmOrder() {
-        List<Product> productList = new ArrayList<>(findAllProduct());
-        List<Order> orderList = new ArrayList<>(findAllOrder());
-        if (AppUtils.areYouSure("Order all Product")) {
-            for (Product product : productList){
-                for (Order order : orderList){
-                    int number = product.getQuaility();
-                    if (order.getProductName().equalsIgnoreCase(product.getName())){
-                        product.setQuaility(number - order.getQuaility());
-                    }
-                }
-            }
-        }
-        CSVUtils.write(PATHPRODUCTS,productList);
-        CSVUtils.write(PATHORDER,new ArrayList<>());
     }
 }

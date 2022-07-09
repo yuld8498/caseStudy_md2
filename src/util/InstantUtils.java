@@ -40,13 +40,14 @@ public class InstantUtils {
 //                InstantUtils.instantToString(product.getUpdateAt()));
     }
     public static String orderFomat(Order order){
-        return String.format("%-48d%-78s%-24d%-24.2f%-48s%-28s%-28s%-28s",
+        return String.format("%-48d%-78s%-24d%-24.2f%-48s%-28s%-28s%-28s%-28s",
                 order.getID(),
                 order.getProductName(),
                 order.getQuaility(),
                 order.getPrice(),
                 order.getUserNameOrder(),
                 order.getPhoneNumberOfUser(),
+                order.getNote(),
                 order.getAddressOfUser(),
                 InstantUtils.instantToString(order.getCreateAt()));
 //                InstantUtils.instantToString(product.getUpdateAt()));

@@ -14,5 +14,7 @@ public interface IProduceService {
     Product sortQuantityASC();
     Product sortQuantityESC();
     void updateQuaility(long id, int newQuaility);
+    void showListProduct(List<Product> list);
+    Product createProduct();
     void findByAuthorName(String authorName);
 }

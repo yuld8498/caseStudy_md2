@@ -187,4 +187,26 @@ public class ProduceService implements IProduceService {
             }
         }
     }
+    @Override
+    public Product createProduct() {
+        Long ID = System.currentTimeMillis() / 1000;
+        System.out.println("Enter Product Name: ");
+        String name = AppUtils.inputStringAgain("Product name ");
+        System.out.println("Enter Product Author Name: ");
+        String author = AppUtils.inputStringAgain("Author name ");
+        System.out.println("Enter Product Quaility: ");
+        int quaility = AppUtils.inputNumberAgain();
+        System.out.println("Enter Price of Product: ");
+        Double price = AppUtils.retryParseDouble();
+        Instant createAt = Instant.now();
+        Instant updateAt = null;
+        return new Product(ID, name, author, quaility, price, createAt, updateAt);
+    }
+    @Override
+    public  void showListProduct(List<Product> list) {
+        System.out.printf("%-58s%-78s%-58s%-48s%-48s%-48s\n","ID","Name","Author","Quaility","Price","Create At\n");
+        for (Product product : list) {
+            System.out.println(InstantUtils.productFomat(product));
+        }
+    }
 }

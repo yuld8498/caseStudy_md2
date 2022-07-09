@@ -11,11 +11,12 @@ public class Order {
     private String addressOfUser;
     private String phoneNumberOfUser;
     private Instant createAt;
+    private String note;
 
     public Order(){
     }
 
-    public Order(Long id, String productName, int quaility, Double price, String userNameOrder, String addressOfUser, String phoneNumberOfUser, Instant createAt) {
+    public Order(Long id, String productName, int quaility, Double price, String userNameOrder, String addressOfUser, String phoneNumberOfUser,String note, Instant createAt) {
         this.ID =id;
         this.productName= productName;
         this.quaility =quaility;
@@ -23,6 +24,7 @@ public class Order {
         this.userNameOrder =userNameOrder;
         this.addressOfUser =addressOfUser;
         this.phoneNumberOfUser = phoneNumberOfUser;
+        this.note = note;
         this.createAt =createAt;
     }
 
@@ -35,13 +37,14 @@ public class Order {
         String phoneNumberOfUser = strings[7].trim();
         String userNameOrder = strings[5].trim();
         String addressOfUser = strings[6].trim();
-        Instant createAt = Instant.parse(strings[8].trim());
-        return new Order(ID,productName,quaility,price,userNameOrder,addressOfUser,phoneNumberOfUser,createAt);
+        String note = strings[8].trim();
+        Instant createAt = Instant.parse(strings[9].trim());
+        return new Order(ID,productName,quaility,price,userNameOrder,addressOfUser,phoneNumberOfUser,note,createAt);
     }
 
     @Override
     public String toString() {
-        return String.format("%d,%s,%d,%f,%s,%s,%s,%s",ID,productName,quaility,price,userNameOrder,addressOfUser,phoneNumberOfUser,createAt);
+        return String.format("%d,%s,%d,%f,%s,%s,%s,%s,%s",ID,productName,quaility,price,userNameOrder,addressOfUser,phoneNumberOfUser,note,createAt);
     }
 
     public Long getID() {
@@ -98,6 +101,14 @@ public class Order {
 
     public void setPhoneNumberOfUser(String phoneNumberOfUser) {
         this.phoneNumberOfUser = phoneNumberOfUser;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Instant getCreateAt() {

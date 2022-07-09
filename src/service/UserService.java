@@ -4,9 +4,12 @@ import model.User;
 import util.AppUtils;
 import util.CSVUtils;
 import util.InstantUtils;
+import util.ValidateUtils;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class UserService implements IUserService {
@@ -27,6 +30,89 @@ public class UserService implements IUserService {
             listUser.add(User.parseUser(s));
         }
         return listUser;
+    }
+    @Override
+    public void sortByIDASC(){
+        List<User> list = new ArrayList<>();
+        for (User user : findAll()){
+            list.add(user);
+        }
+        Collections.sort(list, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return (int) (o1.getID()- o2.getID());
+            }
+        });
+        for (User user : list){
+            System.out.println(InstantUtils.userFormat(user));
+        }
+    }
+    @Override
+    public void sortByIDESC(){
+        List<User> list = new ArrayList<>();
+        for (User user : findAll()){
+            list.add(user);
+        }
+        Collections.sort(list, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return (int) (o2.getID()- o1.getID());
+            }
+        });
+        for (User user : list){
+            System.out.println(InstantUtils.userFormat(user));
+        }
+    }
+    @Override
+    public User createUser(){
+        System.out.println("Enter UserName: ");
+        String userName;
+        boolean repeat ;
+        do {
+            userName = AppUtils.inputStringAgain("UserName");
+            repeat= !existsByUserName(userName);
+            if (!repeat){
+                System.out.println(userName + " already exists");
+            }else {
+                System.out.println(userName+"is valid");
+            }
+        }while (!repeat);
+        System.out.println("Enter password: ");
+        String password;
+        do {
+            password=AppUtils.inputStringAgain("Password");
+            repeat = !ValidateUtils.isPasswordValid(password);
+            if (repeat){
+                System.out.println("Password is not valid");
+            }
+        }while (repeat);
+        System.out.println("Enter Full name: ");
+        String fullName = AppUtils.inputStringAgain("Full name");
+        System.out.println("Enter phone number: ");
+        String phoneNumber;
+        do {
+            phoneNumber=AppUtils.inputStringAgain("Phone Number");
+            repeat = (ValidateUtils.isPhoneValid(phoneNumber)&&!existsByPhoneNumber(phoneNumber));
+            if (!repeat){
+                System.out.println("Phone Number is not valid");
+            }
+        }while (!repeat);
+        System.out.println("Enter Full email: ");
+        String email;
+        do {
+            email=AppUtils.inputStringAgain("email");
+            repeat = !(ValidateUtils.isEmailValid(email)&&!existsByEmail(email));
+            if (repeat){
+                System.out.println("email is not valid");
+            }
+        }while (repeat);
+        System.out.println("Enter Full address: ");
+        String address=AppUtils.inputStringAgain("address");
+        Instant createAt = Instant.now();
+        Instant updateAt = null;
+        String ROLE = "User";
+        Long ID = System.currentTimeMillis()/1000;
+        return new User(ID,userName,password,fullName,phoneNumber,email,address,ROLE,createAt,updateAt);
     }
 
     @Override
@@ -125,6 +211,16 @@ public class UserService implements IUserService {
         }
         System.out.println("can't find this ID.");
         return null;
+    }
+    @Override
+    public void findUserByName(String name){
+        for (User user : findAll()){
+            if (user.getUserName().equals(name)){
+                System.out.println(InstantUtils.userFormat(user));
+                return;
+            }
+        }
+        System.out.println("Can't find this User name, please check again.");
     }
 
     @Override
