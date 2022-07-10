@@ -3,22 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="cbfbf984-cbfd-4ab1-8f03-3abee2013f94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/data/OrderItem.csv" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/data/OrderItem.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/data/product.csv" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/data/product.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/service/OrderItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/OrderItemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/util/InstantUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/util/InstantUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/views/UserView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/views/UserView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/OrderItem.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/OrderItem.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/User.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/User.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/login.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/login.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/IOrderService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/IUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/product.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/product.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ILoanProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ILoanProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/IOrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/IOrderItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/IProduceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/IProduceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/LoanProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LoanProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/OrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/OrderItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/OrderService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/UserManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/UserManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/AppUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/AppUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/InstantUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/InstantUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AdminView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AdminView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/LoginView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/OrderItemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/OrderItemView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/UserView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserView.java" afterDir="false" />
@@ -54,7 +49,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Module2/Case/CaseStudy&quot;
+    &quot;last_opened_file_path&quot;: &quot;D:/Module2/Case/CaseStudy&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
   <component name="RunManager" selected="Application.views.Main">
@@ -146,7 +142,8 @@
       <workItem from="1657069788512" duration="4705000" />
       <workItem from="1657074602072" duration="67415000" />
       <workItem from="1657308321928" duration="2061000" />
-      <workItem from="1657310813632" duration="14097000" />
+      <workItem from="1657310813632" duration="14701000" />
+      <workItem from="1657419214739" duration="18219000" />
     </task>
     <servers />
   </component>

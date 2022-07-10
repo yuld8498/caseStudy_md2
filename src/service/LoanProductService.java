@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoanProductService implements ILoanProduct {
+    private static final String PATHPRODUCTS = "src\\data\\OrderItem.csv";
     private static final String PATHLOAN = "src\\data\\OrderItem.csv";
+    private static final String PATHREVENUE = "src\\data\\revenue.csv";
     private  static  LoanProductService instance;
     private LoanProductService(){
     }
@@ -23,6 +25,7 @@ public class LoanProductService implements ILoanProduct {
         return instance;
     }
     ProduceService produceService = ProduceService.getInstance();
+    OrderItemService orderItemService = OrderItemService.getInstance();
     @Override
     public void loanProducts() {
         List<Order> loanList = new ArrayList<>();
@@ -49,7 +52,7 @@ public class LoanProductService implements ILoanProduct {
                         order.setID(System.currentTimeMillis() / 1000);
                         order.setProductName(product.getName());
                         order.setQuaility(1);
-                        order.setPrice(product.getPrice() * 0.05);
+                        order.setPrice(product.getPrice());
                         order.setUserNameOrder(callUser().getUserName());
                         order.setAddressOfUser(callUser().getAddress());
                         order.setPhoneNumberOfUser(callUser().getMobile());
@@ -64,6 +67,16 @@ public class LoanProductService implements ILoanProduct {
             }
             System.out.println("Cant find this ID, please check again.");
             isready = AppUtils.areYouSure("Add more Product");
+            List<Order> revenueList = new ArrayList<>();
+            for (String s : CSVUtils.read(PATHLOAN)){
+                revenueList.add(Order.parseOrder(s));
+            }
+            for (Order order : revenueList){
+                if (order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName())&&order.getNote().equalsIgnoreCase("confirm loan")){
+                    isready = false;
+                    return;
+                }
+            }
           for (Order order : loanList){
               int count =0;
               if (order.getNote().equalsIgnoreCase("loan")){
@@ -119,7 +132,45 @@ public class LoanProductService implements ILoanProduct {
     @Override
     public void confirmLoanList() {
         if (AppUtils.areYouSure("Loan Items")){
+            List<Order> orderList = new ArrayList<>(orderItemService.findAllOrder());
+            List<Product> productList = new ArrayList<>(orderItemService.findAllProduct());
+            int count =0;
+            for (Order order : orderList){
+                if (order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName())&&order.getNote().equalsIgnoreCase("loan")){
+                    for (Product product : productList){
+                        if (product.getName().equalsIgnoreCase(order.getProductName())&&product.getPrice().equals(order.getPrice())){
+                            product.setQuaility(product.getQuaility()- order.getQuaility());
+                        }
+                    }
+                    order.setNote("Confirm loan");
+                    double priceLoan = order.getPrice();
+                    order.setPrice(priceLoan*0.02);
+                    count++;
+                }
+            }
 
+            if (count==0){
+                System.out.println("Order list is empty, please add product to list.");
+            }else {
+                System.out.println("Complete!");
+            }
+            CSVUtils.write(PATHLOAN,orderList);
+            CSVUtils.write(PATHPRODUCTS, productList);
+        }
+    }
+
+    @Override
+    public void showLoandinglist() {
+        List<Order> list = new ArrayList<>();
+        for (String s : CSVUtils.read(PATHREVENUE)){
+            list.add(Order.parseOrder(s));
+        }
+        System.out.println("List product loanding: \n");
+        for (Order order : list){
+            System.out.println();
+            if (order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName())&&order.getNote().equalsIgnoreCase("confirm loan")){
+                System.out.println(InstantUtils.orderFomat(order));
+            }
         }
     }
 

@@ -1,8 +1,9 @@
 package service;
 
 public interface ILoanProduct {
-    public void loanProducts();
-    public void deleteItemInLoanList();
-    public void showLoanList();
-    public void confirmLoanList();
+     void loanProducts();
+     void deleteItemInLoanList();
+     void showLoanList();
+     void confirmLoanList();
+    void showLoandinglist();
 }

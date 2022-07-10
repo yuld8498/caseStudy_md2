@@ -11,9 +11,8 @@ import java.util.*;
 
 public class UserViewByAdmin {
     private static final Scanner SCANNER = new Scanner(System.in);
-    UserService userService;
+    UserService userService= UserService.getInstance();;
     public void menuUser(){
-        userService = UserService.getInstance();
         int chose;
         do {
             System.out.println("==================== USER MANAGEMENT ======================");

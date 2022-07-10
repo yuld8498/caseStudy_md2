@@ -1,22 +1,35 @@
 package views;
 
+import model.Order;
+import model.Product;
+import service.OrderItemService;
 import util.AppUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminView {
     ProductView productView;
     UserViewByAdmin userViewByAdmin;
-    public void menuAdmin(){
+    OrderItemService orderItemService;
+
+    public void menuAdmin() {
+        orderItemService = OrderItemService.getInstance();
         productView = ProductView.getInstance();
         userViewByAdmin = new UserViewByAdmin();
+        OrderItemView orderItemView = new OrderItemView();
         int chose;
         do {
             System.out.println("==================== ADMIN ======================");
-            System.out.printf("%10s%s","","1. Management Product\n");
-            System.out.printf("%10s%s","","2. Managerment User\n");
-            System.out.printf("%10s%s","","3. Managerment Order\n");
-            System.out.printf("%10s%s","","4. Log out Admin\n");
-             chose = AppUtils.choseAgain(1,4);
-            switch (chose){
+            System.out.printf("%10s%s", "", "1. Management Product\n");
+            System.out.printf("%10s%s", "", "2. Managerment User\n");
+            System.out.printf("%10s%s", "", "3. Managerment Order\n");
+            System.out.printf("%10s%s", "", "4. Show revenue\n");
+            System.out.printf("%10s%s", "", "5. Cashier\n");
+            System.out.printf("%10s%s", "", "6. Return Product\n");
+            System.out.printf("%10s%s", "", "7. Log out Admin\n");
+            chose = AppUtils.choseAgain(1, 7);
+            switch (chose) {
                 case 1:
                     productView.menuProduct();
                     break;
@@ -24,8 +37,29 @@ public class AdminView {
                     userViewByAdmin.menuUser();
                     break;
                 case 3:
+                    orderItemView.menuOrder();
+                    break;
                 case 4:
+                    orderItemService.showRevenue();
+                    break;
+                case 5:
+                    boolean repeat =false;
+                   do {
+                       System.out.println("Enter User Name: ");
+                       String userName = AppUtils.inputStringAgain("userName");
+                       if (AppUtils.areYouSure("Print bill")) {
+                           if (orderItemService.cashier(userName).size()!=0){
+                               AppUtils.bill(orderItemService.cashier(userName));
+                           }else {
+                               repeat = AppUtils.areYouSure("Cashier again");
+                           }
+                       }
+                   }while (repeat);
+                    break;
+                case 6:
+                    orderItemService.returnProduct();
+                    break;
             }
-        }while (chose!=4);
+        } while (chose != 7);
     }
 }

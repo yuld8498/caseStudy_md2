@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderItemService implements IOrderItemService {
+    public final static String PATHREVENUE = "src/data/revenue.csv";
     public final static String PATHPRODUCTS = "src/data/product.csv";
     public final static String PATHORDER = "src/data/OrderItem.csv";
     private static OrderItemService instance;
+    ProduceService produceService = ProduceService.getInstance();
     private OrderItemService(){
     }
 
@@ -142,5 +144,67 @@ public class OrderItemService implements IOrderItemService {
 
     @Override
     public void confirmOrder() {
+        List<Order> orderList = new ArrayList<>(findAllOrder());
+        List<Product> productList = new ArrayList<>(findAllProduct());
+        int count =0;
+        for (Order order : orderList){
+            if (order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName())&&order.getNote().equalsIgnoreCase("order")){
+                for (Product product : productList){
+                    if (product.getName().equalsIgnoreCase(order.getProductName())&&product.getPrice().equals(order.getPrice())){
+                        product.setQuaility(product.getQuaility()- order.getQuaility());
+                    }
+                }
+                order.setNote("Confirm order");
+                count++;
+            }
+        }
+
+        if (count==0){
+            System.out.println("Order list is empty, please add product to list.");
+        }else {
+            System.out.println("Complete!");
+        }
+        CSVUtils.write(PATHORDER,orderList);
+        CSVUtils.write(PATHPRODUCTS, productList);
+    }
+    @Override
+    public void showRevenue(){
+        List<String> list = new ArrayList<>(CSVUtils.read(PATHREVENUE));
+        List<Order> orderList = new ArrayList<>();
+        for (String strings : list){
+            orderList.add(Order.parseOrder(strings));
+        }
+        for (Order order : orderList){
+            System.out.println(InstantUtils.orderFomat(order));
+        }
+    }
+    public List<Order> cashier(String UserName){
+        List<Order> orderList = new ArrayList<>();
+        for (String s : CSVUtils.read(PATHREVENUE)){
+            orderList.add(Order.parseOrder(s));
+        }
+        List<Order> list = new ArrayList<>();
+        List<Order> listOrderBeforeCashier = new ArrayList<>(findAllOrder());
+        for (Order order : listOrderBeforeCashier){
+            if ((order.getNote().equalsIgnoreCase("confirm order")||order.getNote().equalsIgnoreCase("confirm loan"))&&order.getUserNameOrder().equalsIgnoreCase(UserName)){
+                list.add(order);
+                orderList.add(order);
+            }
+        }
+        for (Order order : listOrderBeforeCashier){
+            if (order.getNote().equalsIgnoreCase("confirm order")||order.getNote().equalsIgnoreCase("confirm loan")){
+                listOrderBeforeCashier.remove(order);
+            }
+        }
+        CSVUtils.write(PATHORDER,listOrderBeforeCashier);
+        if (list.size()==0){
+            System.out.println("Confirm order is empty, please check order list or User cashier.");
+        }else {
+            CSVUtils.write(PATHREVENUE,list);
+        }
+        return list;
+    }
+    public void returnProduct(){
+
     }
 }

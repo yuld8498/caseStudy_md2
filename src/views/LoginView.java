@@ -32,6 +32,7 @@ public class LoginView {
                         if (loginAdmin()){
                             AdminView adminView = new AdminView();
                             adminView.menuAdmin();
+                            repeatLoginAdmin =false;
                         }else {
                             repeatLoginAdmin=AppUtils.areYouSure("Login again");
                         }
@@ -43,6 +44,7 @@ public class LoginView {
                         if (loginUser()){
                             UserView userView = new UserView();
                             userView.showMenu();
+                            repeatLoginUser =false;
                         }else {
                             repeatLoginUser = AppUtils.areYouSure("Login again");
                         }
@@ -50,7 +52,7 @@ public class LoginView {
                     break;
                 case 3:
                     do {
-                        userService.addNewUser(createUser());
+                        userService.addNewUser(userService.createUser());
                     }while (AppUtils.areYouSure("Create more User"));
                     break;
             }
@@ -96,54 +98,54 @@ public class LoginView {
         }
         return user;
     }
-    public User createUser(){
-        System.out.println("Enter UserName: ");
-        String userName;
-        boolean repeat ;
-        do {
-            userName = AppUtils.inputStringAgain("UserName");
-            repeat= !userService.existsByUserName(userName);
-            if (!repeat){
-                System.out.println(userName + " already exists");
-            }else {
-                System.out.println(userName+"is valid");
-            }
-        }while (!repeat);
-        System.out.println("Enter password: ");
-        String password;
-        do {
-            password=AppUtils.inputStringAgain("Password");
-            repeat = !ValidateUtils.isPasswordValid(password);
-            if (repeat){
-                System.out.println("Password is not valid");
-            }
-        }while (repeat);
-        System.out.println("Enter Full name: ");
-        String fullName = AppUtils.inputStringAgain("Full name");
-        System.out.println("Enter phone number: ");
-        String phoneNumber;
-        do {
-            phoneNumber=AppUtils.inputStringAgain("Phone Number");
-            repeat = (ValidateUtils.isPhoneValid(phoneNumber)&&!userService.existsByPhoneNumber(phoneNumber));
-            if (!repeat){
-                System.out.println("Phone Number is not valid");
-            }
-        }while (!repeat);
-        System.out.println("Enter Full email: ");
-        String email;
-        do {
-            email=AppUtils.inputStringAgain("email");
-            repeat = !(ValidateUtils.isEmailValid(email)&&!userService.existsByEmail(email));
-            if (repeat){
-                System.out.println("email is not valid");
-            }
-        }while (repeat);
-        System.out.println("Enter Full address: ");
-        String address=AppUtils.inputStringAgain("address");
-        Instant createAt = Instant.now();
-        Instant updateAt = null;
-        String ROLE = "User";
-        Long ID = System.currentTimeMillis()/1000;
-        return new User(ID,userName,password,fullName,phoneNumber,email,address,ROLE,createAt,updateAt);
-    }
+//    public User createUser(){
+//        System.out.println("Enter UserName: ");
+//        String userName;
+//        boolean repeat ;
+//        do {
+//            userName = AppUtils.inputStringAgain("UserName");
+//            repeat= !userService.existsByUserName(userName);
+//            if (!repeat){
+//                System.out.println(userName + " already exists");
+//            }else {
+//                System.out.println(userName+"is valid");
+//            }
+//        }while (!repeat);
+//        System.out.println("Enter password: ");
+//        String password;
+//        do {
+//            password=AppUtils.inputStringAgain("Password");
+//            repeat = !ValidateUtils.isPasswordValid(password);
+//            if (repeat){
+//                System.out.println("Password is not valid");
+//            }
+//        }while (repeat);
+//        System.out.println("Enter Full name: ");
+//        String fullName = AppUtils.inputStringAgain("Full name");
+//        System.out.println("Enter phone number: ");
+//        String phoneNumber;
+//        do {
+//            phoneNumber=AppUtils.inputStringAgain("Phone Number");
+//            repeat = (ValidateUtils.isPhoneValid(phoneNumber)&&!userService.existsByPhoneNumber(phoneNumber));
+//            if (!repeat){
+//                System.out.println("Phone Number is not valid");
+//            }
+//        }while (!repeat);
+//        System.out.println("Enter Full email: ");
+//        String email;
+//        do {
+//            email=AppUtils.inputStringAgain("email");
+//            repeat = !(ValidateUtils.isEmailValid(email)&&!userService.existsByEmail(email));
+//            if (repeat){
+//                System.out.println("email is not valid");
+//            }
+//        }while (repeat);
+//        System.out.println("Enter Full address: ");
+//        String address=AppUtils.inputStringAgain("address");
+//        Instant createAt = Instant.now();
+//        Instant updateAt = null;
+//        String ROLE = "User";
+//        Long ID = System.currentTimeMillis()/1000;
+//        return new User(ID,userName,password,fullName,phoneNumber,email,address,ROLE,createAt,updateAt);
+//    }
 }

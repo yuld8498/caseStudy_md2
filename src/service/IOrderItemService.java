@@ -14,4 +14,6 @@ public interface IOrderItemService {
     void deleteProductInListByID(Long ID);
     void clearOrderList();
     void confirmOrder();
+    void showRevenue();
+     List<Order> cashier(String UserName);
 }

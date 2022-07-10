@@ -2,6 +2,7 @@ package views;
 
 import model.Order;
 import model.Product;
+import model.User;
 import service.OrderItemService;
 import service.ProduceService;
 import util.AppUtils;
@@ -55,7 +56,7 @@ public class OrderItemView {
                     orderItemService.clearOrderList();
                     break;
                 case 7:
-                    orderItemService.confirmOrder();
+                        orderItemService.confirmOrder();
                     break;
             }
         }while (chose!=8);

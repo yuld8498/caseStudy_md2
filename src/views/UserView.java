@@ -6,6 +6,7 @@ import model.User;
 import service.LoanProductService;
 import service.ProduceService;
 import service.UserManagement;
+import service.UserService;
 import util.AppUtils;
 import util.CSVUtils;
 import util.InstantUtils;
@@ -17,10 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserView {
-    UserManagement userManagement;
-
+    private static final String PATHUSER = "src\\data\\login.csv";
+    UserManagement userManagement = UserManagement.getInstance();;
     public void showMenu() {
-        userManagement = UserManagement.getInstance();
         int chose;
         do {
             System.out.println("==================== User View ======================");
@@ -61,10 +61,11 @@ public class UserView {
             System.out.printf("%10s%s", "", "1. Show Loan List\n");
             System.out.printf("%10s%s", "", "2. Add Items to loan\n");
             System.out.printf("%10s%s", "", "3. Delete Items to loan\n");
-            System.out.printf("%10s%s", "", "4. Confirm\n");
-            System.out.printf("%10s%s", "", "5. Back \n");
+            System.out.printf("%10s%s", "", "4. Show list Loanding\n");
+            System.out.printf("%10s%s", "", "5. Confirm\n");
+            System.out.printf("%10s%s", "", "6. Back \n");
             System.out.println("Enter you chose: ");
-            chose = AppUtils.choseAgain(1, 5);
+            chose = AppUtils.choseAgain(1, 6);
             switch (chose){
                 case 1:
                     loanProductService.showLoanList();
@@ -76,6 +77,9 @@ public class UserView {
                     loanProductService.deleteItemInLoanList();
                     break;
                 case 4:
+                    loanProductService.showLoandinglist();
+                    break;
+                case 5:
                     loanProductService.confirmLoanList();
                     break;
             }
@@ -84,7 +88,6 @@ public class UserView {
     }
 
     public void changeInfo() {
-        userManagement.getInstance();
         int chose;
         do {
             System.out.println("==================== CHANGE INFOMATION ======================");

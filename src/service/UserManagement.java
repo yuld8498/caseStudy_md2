@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManagement implements IUserManagement {
+    private static final String PATHLOGIN = "src\\data\\login.csv";
     private static final String PATHUSER = "src\\data\\User.csv";
     private static final String PATHORDER = "src\\data\\OrderItem.csv";
     private static UserManagement instance;
@@ -63,12 +64,17 @@ public class UserManagement implements IUserManagement {
         }
     }
     public void changePhoneNumber(Long userID, String newPhoneNumber) {
+        List<User> fullUser = new ArrayList<>(findAllUser());
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
                 if (AppUtils.areYouSure("change PhoneNumber")){
                     user.setMobile(newPhoneNumber);
                     System.out.println("PhoneNumber change is correct");
+                    List<User> list = new ArrayList<>();
+                    list.add(user);
+                    CSVUtils.write(PATHLOGIN,list);
+                    CSVUtils.write(PATHUSER,fullUser);
                     return;
                 }
             }
@@ -76,12 +82,17 @@ public class UserManagement implements IUserManagement {
         }
     }
     public void changeFullname(Long userID, String fullname) {
+        List<User> fullUser = new ArrayList<>(findAllUser());
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
                 if (AppUtils.areYouSure("change FullName")){
                     user.setFullName(fullname);
                     System.out.println("FullName change is correct");
+                    List<User> list = new ArrayList<>();
+                    list.add(user);
+                    CSVUtils.write(PATHLOGIN,list);
+                    CSVUtils.write(PATHUSER,fullUser);
                     return;
                 }
             }
@@ -91,12 +102,17 @@ public class UserManagement implements IUserManagement {
 
     @Override
     public void changepassword(Long userID, String newPassword) {
-        for (User user : findAllUser()) {
+        List<User> fullUser = new ArrayList<>(findAllUser());
+        for (User user : fullUser) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
                 if (AppUtils.areYouSure("change password")){
                     user.setPassword(newPassword);
                     System.out.println("Password change is correct");
+                    List<User> list = new ArrayList<>();
+                    list.add(user);
+                    CSVUtils.write(PATHUSER,fullUser);
+                    CSVUtils.write(PATHLOGIN,list);
                     return;
                 }
             }
@@ -106,12 +122,17 @@ public class UserManagement implements IUserManagement {
 
     @Override
     public void changeEmail(Long userID, String newEmail) {
+        List<User> fullUser = new ArrayList<>(findAllUser());
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
                 if (AppUtils.areYouSure("change Email")){
                     user.setEmail(newEmail);
                     System.out.println("Password change is correct");
+                    List<User> list = new ArrayList<>();
+                    list.add(user);
+                    CSVUtils.write(PATHLOGIN,list);
+                    CSVUtils.write(PATHUSER,fullUser);
                     return;
                 }
             }
@@ -121,12 +142,17 @@ public class UserManagement implements IUserManagement {
 
     @Override
     public void changeAddress(Long userID, String newAddress) {
+        List<User> fullUser = new ArrayList<>(findAllUser());
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
                 if (AppUtils.areYouSure("change Address")){
                     user.setAddress(newAddress);
                     System.out.println("Password change is correct");
+                    List<User> list = new ArrayList<>();
+                    list.add(user);
+                    CSVUtils.write(PATHLOGIN,list);
+                    CSVUtils.write(PATHUSER,fullUser);
                     return;
                 }
             }
@@ -136,12 +162,17 @@ public class UserManagement implements IUserManagement {
 
     @Override
     public void changPhoneNumber(Long userID, String newPhoneNumber) {
+        List<User> fullUser = new ArrayList<>(findAllUser());
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
                 if (AppUtils.areYouSure("change Phone number")){
                     user.setMobile(newPhoneNumber);
                     System.out.println("Password change is correct");
+                    List<User> list = new ArrayList<>();
+                    list.add(user);
+                    CSVUtils.write(PATHLOGIN,list);
+                    CSVUtils.write(PATHUSER,fullUser);
                     return;
                 }
             }
