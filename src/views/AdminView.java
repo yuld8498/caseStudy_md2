@@ -4,6 +4,7 @@ import model.Order;
 import model.Product;
 import service.OrderItemService;
 import util.AppUtils;
+import util.CSVUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +49,22 @@ public class AdminView {
                        System.out.println("Enter User Name: ");
                        String userName = AppUtils.inputStringAgain("userName");
                        if (AppUtils.areYouSure("Print bill")) {
-                           if (orderItemService.cashier(userName).size()!=0){
-                               AppUtils.bill(orderItemService.cashier(userName));
+                           List<Order> list = orderItemService.cashier(userName);
+                           if (list.size()!=0){
+                               AppUtils.bill(list, userName);
                            }else {
                                repeat = AppUtils.areYouSure("Cashier again");
                            }
                        }
+                       List<Order> listOrderBeforeCashier = new ArrayList<>();
+                       for (Order order : orderItemService.findAllOrder()) {
+                           if ((order.getNote().equalsIgnoreCase("confirm order")&&order.getUserNameOrder().equalsIgnoreCase(userName)) || (order.getNote().equalsIgnoreCase("confirm loan")&&order.getUserNameOrder().equalsIgnoreCase(userName))) {
+                               continue;
+                           } else {
+                               listOrderBeforeCashier.add(order);
+                           }
+                       }
+                       CSVUtils.write("src\\data\\OrderItem.csv", listOrderBeforeCashier);
                    }while (repeat);
                     break;
                 case 6:

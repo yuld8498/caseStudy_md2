@@ -91,7 +91,7 @@ public class AppUtils {
         }
         return false;
     }
-    public static void bill(List<Order> list){
+    public static void bill(List<Order> list, String UserName){
         System.out.printf("%120s","YUL BOOKs STORE\n");
         System.out.printf("%120s","28 Nguyen Tri Phuong\n");
         System.out.printf("%115s","Mobile: 0962435396 - 01642156169\n");
@@ -99,12 +99,13 @@ public class AppUtils {
         System.out.println("\n");
         System.out.printf("||%s%30d%s","Bill No.",System.currentTimeMillis()/10000,"\n\n");
         System.out.printf("||%s%30s%s","Create at",InstantUtils.instantToString(Instant.now()),"\n\n");
-        System.out.printf("||%s%30s%s","User Order",callUser().getUserName(),"\n\n");
+        System.out.printf("||%s%30s%s","User Order",UserName,"\n\n");
         System.out.printf("||%s%20s%s","Cashier","ADMIN","\n\n");
         System.out.printf("||%-70s%-50s%-45s%-45s%s","Product Name","Amount","Price","Total","\n");
         double resul =0;
         for (Order order : list){
             System.out.printf("%-70s%-40s%-40s%-40s%s",order.getProductName(),order.getQuaility(),order.getPrice(),(order.getQuaility()*order.getPrice()),"\n\n");
+            resul+= order.getQuaility()*order.getPrice();
         }
         System.out.println("RESULT:          " + InstantUtils.doubleToVND(resul));
         System.out.printf("%s","Thank's for using our service!\n");

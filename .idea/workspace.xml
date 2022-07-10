@@ -4,20 +4,11 @@
     <list default="true" id="cbfbf984-cbfd-4ab1-8f03-3abee2013f94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/OrderItem.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/OrderItem.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/User.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/User.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/product.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/product.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/ILoanProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ILoanProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/IOrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/IOrderItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/IProduceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/IProduceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/LoanProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LoanProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/revenue.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/revenue.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/OrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/OrderItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/UserManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/UserManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/AppUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/AppUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/AdminView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AdminView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/OrderItemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/OrderItemView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/UserView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/UserViewByAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserViewByAdmin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +134,7 @@
       <workItem from="1657074602072" duration="67415000" />
       <workItem from="1657308321928" duration="2061000" />
       <workItem from="1657310813632" duration="14701000" />
-      <workItem from="1657419214739" duration="18219000" />
+      <workItem from="1657419214739" duration="22023000" />
     </task>
     <servers />
   </component>

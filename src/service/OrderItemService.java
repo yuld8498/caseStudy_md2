@@ -17,7 +17,8 @@ public class OrderItemService implements IOrderItemService {
     public final static String PATHORDER = "src/data/OrderItem.csv";
     private static OrderItemService instance;
     ProduceService produceService = ProduceService.getInstance();
-    private OrderItemService(){
+
+    private OrderItemService() {
     }
 
     public static OrderItemService getInstance() {
@@ -48,8 +49,8 @@ public class OrderItemService implements IOrderItemService {
 
     @Override
     public void findByName(String name) {
-        for (Product product : findAllProduct()){
-            if (product.getName().equalsIgnoreCase(name)){
+        for (Product product : findAllProduct()) {
+            if (product.getName().equalsIgnoreCase(name)) {
                 System.out.println(InstantUtils.productFomat(product));
             }
         }
@@ -67,12 +68,12 @@ public class OrderItemService implements IOrderItemService {
             if (product.getID().equals(ID)) {
                 System.out.println(InstantUtils.productFomat(product));
                 System.out.println("Enter quaility");
-                int quaility = AppUtils.choseAgain(1,product.getQuaility());
+                int quaility = AppUtils.choseAgain(1, product.getQuaility());
                 newProduct = product;
                 newProduct.setQuaility(quaility);
-                if (AppUtils.areYouSure("Order this")){
+                if (AppUtils.areYouSure("Order this")) {
                     Order order = new Order();
-                    order.setID(System.currentTimeMillis()/1000);
+                    order.setID(System.currentTimeMillis() / 1000);
                     order.setUserNameOrder(callUser().getUserName());
                     order.setPrice(newProduct.getPrice());
                     order.setQuaility(newProduct.getQuaility());
@@ -82,7 +83,7 @@ public class OrderItemService implements IOrderItemService {
                     order.setCreateAt(Instant.now());
                     order.setNote("Order");
                     list.add(order);
-                    CSVUtils.write(PATHORDER,list);
+                    CSVUtils.write(PATHORDER, list);
                     return order;
                 }
             }
@@ -90,8 +91,9 @@ public class OrderItemService implements IOrderItemService {
         System.out.println("Can't find this ID, please check again.");
         return null;
     }
-    public static User callUser(){
-        User user = null ;
+
+    public static User callUser() {
+        User user = null;
         List<String> record = CSVUtils.read("src\\data\\login.csv");
         for (String s : record) {
             user = User.parseUser(s);
@@ -102,7 +104,7 @@ public class OrderItemService implements IOrderItemService {
     @Override
     public void showOrderList() {
         for (Order order : findAllOrder()) {
-            if ((order.getNote().equalsIgnoreCase("order")&&order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName()))||callUser().getROLE().equalsIgnoreCase("Admin")){
+            if ((order.getNote().equalsIgnoreCase("order") && order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName())) || callUser().getROLE().equalsIgnoreCase("Admin")) {
                 System.out.println(order.toString());
             }
         }
@@ -112,7 +114,7 @@ public class OrderItemService implements IOrderItemService {
     public void deleteProductInListByID(Long ID) {
         List<Order> list = new ArrayList<>(findAllOrder());
         for (Order order : list) {
-            if (order.getID().equals(ID)&& order.getNote().equalsIgnoreCase("order")) {
+            if (order.getID().equals(ID) && order.getNote().equalsIgnoreCase("order")) {
                 if (AppUtils.areYouSure("Delete product in order list")) {
                     list.remove(order);
                     CSVUtils.write(PATHORDER, list);
@@ -129,8 +131,8 @@ public class OrderItemService implements IOrderItemService {
     public void clearOrderList() {
         List<Order> newlist = new ArrayList<>();
         List<Order> list = new ArrayList<>(findAllOrder());
-        for (Order order : list){
-            if (order.getNote().equalsIgnoreCase("loan")){
+        for (Order order : list) {
+            if (order.getNote().equalsIgnoreCase("loan")) {
                 newlist.add(order);
             }
         }
@@ -146,12 +148,12 @@ public class OrderItemService implements IOrderItemService {
     public void confirmOrder() {
         List<Order> orderList = new ArrayList<>(findAllOrder());
         List<Product> productList = new ArrayList<>(findAllProduct());
-        int count =0;
-        for (Order order : orderList){
-            if (order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName())&&order.getNote().equalsIgnoreCase("order")){
-                for (Product product : productList){
-                    if (product.getName().equalsIgnoreCase(order.getProductName())&&product.getPrice().equals(order.getPrice())){
-                        product.setQuaility(product.getQuaility()- order.getQuaility());
+        int count = 0;
+        for (Order order : orderList) {
+            if (order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName()) && order.getNote().equalsIgnoreCase("order")) {
+                for (Product product : productList) {
+                    if (product.getName().equalsIgnoreCase(order.getProductName()) && product.getPrice().equals(order.getPrice())) {
+                        product.setQuaility(product.getQuaility() - order.getQuaility());
                     }
                 }
                 order.setNote("Confirm order");
@@ -159,52 +161,47 @@ public class OrderItemService implements IOrderItemService {
             }
         }
 
-        if (count==0){
+        if (count == 0) {
             System.out.println("Order list is empty, please add product to list.");
-        }else {
+        } else {
             System.out.println("Complete!");
         }
-        CSVUtils.write(PATHORDER,orderList);
+        CSVUtils.write(PATHORDER, orderList);
         CSVUtils.write(PATHPRODUCTS, productList);
     }
+
     @Override
-    public void showRevenue(){
+    public void showRevenue() {
         List<String> list = new ArrayList<>(CSVUtils.read(PATHREVENUE));
         List<Order> orderList = new ArrayList<>();
-        for (String strings : list){
+        for (String strings : list) {
             orderList.add(Order.parseOrder(strings));
         }
-        for (Order order : orderList){
+        for (Order order : orderList) {
             System.out.println(InstantUtils.orderFomat(order));
         }
     }
-    public List<Order> cashier(String UserName){
+
+    public List<Order> cashier(String UserName) {
+        List<Order> list = new ArrayList<>();
         List<Order> orderList = new ArrayList<>();
-        for (String s : CSVUtils.read(PATHREVENUE)){
+        for (String s : CSVUtils.read(PATHREVENUE)) {
             orderList.add(Order.parseOrder(s));
         }
-        List<Order> list = new ArrayList<>();
-        List<Order> listOrderBeforeCashier = new ArrayList<>(findAllOrder());
-        for (Order order : listOrderBeforeCashier){
-            if ((order.getNote().equalsIgnoreCase("confirm order")||order.getNote().equalsIgnoreCase("confirm loan"))&&order.getUserNameOrder().equalsIgnoreCase(UserName)){
+        for (Order order : findAllOrder()) {
+            if ((order.getNote().equalsIgnoreCase("confirm order")&& order.getUserNameOrder().equalsIgnoreCase(UserName)) || (order.getNote().equalsIgnoreCase("confirm loan") && order.getUserNameOrder().equalsIgnoreCase(UserName))) {
                 list.add(order);
                 orderList.add(order);
             }
         }
-        for (Order order : listOrderBeforeCashier){
-            if (order.getNote().equalsIgnoreCase("confirm order")||order.getNote().equalsIgnoreCase("confirm loan")){
-                listOrderBeforeCashier.remove(order);
-            }
-        }
-        CSVUtils.write(PATHORDER,listOrderBeforeCashier);
-        if (list.size()==0){
+        CSVUtils.write(PATHREVENUE, orderList);
+        if (list.size() == 0) {
             System.out.println("Confirm order is empty, please check order list or User cashier.");
-        }else {
-            CSVUtils.write(PATHREVENUE,list);
         }
         return list;
     }
-    public void returnProduct(){
+
+    public void returnProduct() {
 
     }
 }
