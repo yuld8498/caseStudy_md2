@@ -4,15 +4,11 @@ import model.User;
 import service.UserService;
 import util.AppUtils;
 import util.InstantUtils;
-import util.ValidateUtils;
-
-import java.time.Instant;
-import java.util.*;
 
 public class UserViewByAdmin {
-    private static final Scanner SCANNER = new Scanner(System.in);
-    UserService userService= UserService.getInstance();;
-    public void menuUser(){
+    UserService userService = UserService.getInstance();
+
+    public void menuUser() {
         int chose;
         do {
             System.out.println("==================== USER MANAGEMENT ======================");
@@ -25,22 +21,24 @@ public class UserViewByAdmin {
             System.out.printf("%10s%s", "", "7. Sort User List for ID ASC\n");
             System.out.printf("%10s%s", "", "8. Sort User List for ID ESC\n");
             System.out.printf("%10s%s", "", "9. Back to Menu Admin\n");
-            chose = AppUtils.choseAgain(1,9);
-            switch (chose){
-                case 1:  System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s\n",
-                        "ID","user Name","Password","Full Name","Mobile","Email","Address","Create At\n");
-                  for (User user : userService.findAll()){
-                      System.out.println(InstantUtils.userFormat(user));
-                  }
+            System.out.println("============================================================");
+            chose = AppUtils.choseAgain(1, 9);
+            switch (chose) {
+                case 1:
+                    System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s%45s\n",
+                            "ID", "user Name", "Password", "Full Name", "Mobile", "Email", "Address", "Create At", "Update At\n");
+                    for (User user : userService.findAll()) {
+                        System.out.println(InstantUtils.userFormat(user));
+                    }
                     break;
                 case 2:
                     System.out.println("Enter ID of User want to find: ");
                     Long ID = AppUtils.retryParseLong();
-                    if (userService.showInfomationUserbyID(ID)==null){
+                    if (userService.showInfomationUserbyID(ID) == null) {
                         System.out.println("Can't find this User with " + ID + " in user list, please check again.");
-                    }else {
+                    } else {
                         System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s\n",
-                                "ID","user Name","Password","Full Name","Mobile","Email","Address","Create At\n");
+                                "ID", "user Name", "Password", "Full Name", "Mobile", "Email", "Address", "Create At\n");
                         System.out.println(InstantUtils.userFormat(userService.showInfomationUserbyID(ID)));
                     }
                     break;
@@ -69,7 +67,7 @@ public class UserViewByAdmin {
                     userService.sortByIDESC();
                     break;
             }
-        }while (chose!=9);
+        } while (chose != 9);
     }
 //    public User createUser(){
 //        System.out.println("Enter UserName: ");

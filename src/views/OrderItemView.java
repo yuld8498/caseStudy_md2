@@ -1,20 +1,16 @@
 package views;
 
-import model.Order;
-import model.Product;
-import model.User;
 import service.OrderItemService;
 import service.ProduceService;
 import util.AppUtils;
-import util.InstantUtils;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class OrderItemView {
     private static final Scanner SCANNER = new Scanner(System.in);
     OrderItemService orderItemService;
-    public void menuOrder(){
+
+    public void menuOrder() {
         orderItemService = OrderItemService.getInstance();
         ProduceService produceService = ProduceService.getInstance();
         int chose;
@@ -28,9 +24,10 @@ public class OrderItemView {
             System.out.printf("%10s%s", "", "6. Clear Order List\n");
             System.out.printf("%10s%s", "", "7. Confirm Order\n");
             System.out.printf("%10s%s", "", "8. Back to Menu\n");
+            System.out.println("===================================================================");
             System.out.println("Enter you chose: ");
-            chose = AppUtils.choseAgain(1,8);
-            switch (chose){
+            chose = AppUtils.choseAgain(1, 8);
+            switch (chose) {
                 case 1:
                     produceService.showListProduct(orderItemService.findAllProduct());
                     break;
@@ -56,10 +53,10 @@ public class OrderItemView {
                     orderItemService.clearOrderList();
                     break;
                 case 7:
-                        orderItemService.confirmOrder();
+                    orderItemService.confirmOrder();
                     break;
             }
-        }while (chose!=8);
+        } while (chose != 8);
     }
 
 //    public static void showListProduct(List<Product> list) {

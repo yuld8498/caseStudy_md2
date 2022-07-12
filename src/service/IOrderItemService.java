@@ -1,12 +1,12 @@
 package service;
 
 import model.Order;
-import model.Product;
+import model.Book;
 
 import java.util.List;
 
 public interface IOrderItemService {
-    List<Product> findAllProduct();
+    List<Book> findAllProduct();
     List<Order> findAllOrder();
     void findByName(String name);
     Order oderByID(Long ID);

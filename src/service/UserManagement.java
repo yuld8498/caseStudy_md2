@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManagement implements IUserManagement {
-    private static final String PATHLOGIN = "src\\data\\login.csv";
-    private static final String PATHUSER = "src\\data\\User.csv";
-    private static final String PATHORDER = "src\\data\\OrderItem.csv";
+    private static final String PATHLOGIN = "data\\login.csv";
+    private static final String PATHUSER = "data\\User.csv";
+    private static final String PATHORDER = "data\\OrderItem.csv";
     private static UserManagement instance;
-    private UserManagement(){
+
+    private UserManagement() {
 
     }
 
@@ -50,7 +51,7 @@ public class UserManagement implements IUserManagement {
                 return;
             }
         }
-        System.out.println("Can't find user this ID, please check again.");
+        System.err.println("Can't find user this ID, please check again.");
     }
 
     @Override
@@ -60,43 +61,45 @@ public class UserManagement implements IUserManagement {
                 System.out.println(InstantUtils.userFormat(user));
                 System.out.println("\n");
             }
-            System.out.println("Can't find user this ID, please check again.");
+            System.err.println("Can't find user this ID, please check again.");
         }
     }
+
     public void changePhoneNumber(Long userID, String newPhoneNumber) {
         List<User> fullUser = new ArrayList<>(findAllUser());
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
-                if (AppUtils.areYouSure("change PhoneNumber")){
+                if (AppUtils.areYouSure("change PhoneNumber")) {
                     user.setMobile(newPhoneNumber);
                     System.out.println("PhoneNumber change is correct");
                     List<User> list = new ArrayList<>();
                     list.add(user);
-                    CSVUtils.write(PATHLOGIN,list);
-                    CSVUtils.write(PATHUSER,fullUser);
+                    CSVUtils.write(PATHLOGIN, list);
+                    CSVUtils.write(PATHUSER, fullUser);
                     return;
                 }
             }
-            System.out.println("Can't find user this ID, please check again.");
+            System.err.println("Can't find user this ID, please check again.");
         }
     }
+
     public void changeFullname(Long userID, String fullname) {
         List<User> fullUser = new ArrayList<>(findAllUser());
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
-                if (AppUtils.areYouSure("change FullName")){
+                if (AppUtils.areYouSure("change FullName")) {
                     user.setFullName(fullname);
                     System.out.println("FullName change is correct");
                     List<User> list = new ArrayList<>();
                     list.add(user);
-                    CSVUtils.write(PATHLOGIN,list);
-                    CSVUtils.write(PATHUSER,fullUser);
+                    CSVUtils.write(PATHLOGIN, list);
+                    CSVUtils.write(PATHUSER, fullUser);
                     return;
                 }
             }
-            System.out.println("Can't find user this ID, please check again.");
+            System.err.println("Can't find user this ID, please check again.");
         }
     }
 
@@ -106,17 +109,17 @@ public class UserManagement implements IUserManagement {
         for (User user : fullUser) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
-                if (AppUtils.areYouSure("change password")){
+                if (AppUtils.areYouSure("change password")) {
                     user.setPassword(newPassword);
                     System.out.println("Password change is correct");
                     List<User> list = new ArrayList<>();
                     list.add(user);
-                    CSVUtils.write(PATHUSER,fullUser);
-                    CSVUtils.write(PATHLOGIN,list);
+                    CSVUtils.write(PATHUSER, fullUser);
+                    CSVUtils.write(PATHLOGIN, list);
                     return;
                 }
             }
-            System.out.println("Can't find user this ID, please check again.");
+            System.err.println("Can't find user this ID, please check again.");
         }
     }
 
@@ -126,17 +129,17 @@ public class UserManagement implements IUserManagement {
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
-                if (AppUtils.areYouSure("change Email")){
+                if (AppUtils.areYouSure("change Email")) {
                     user.setEmail(newEmail);
                     System.out.println("Password change is correct");
                     List<User> list = new ArrayList<>();
                     list.add(user);
-                    CSVUtils.write(PATHLOGIN,list);
-                    CSVUtils.write(PATHUSER,fullUser);
+                    CSVUtils.write(PATHLOGIN, list);
+                    CSVUtils.write(PATHUSER, fullUser);
                     return;
                 }
             }
-            System.out.println("Can't find user this ID, please check again.");
+            System.err.println("Can't find user this ID, please check again.");
         }
     }
 
@@ -146,17 +149,17 @@ public class UserManagement implements IUserManagement {
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
-                if (AppUtils.areYouSure("change Address")){
+                if (AppUtils.areYouSure("change Address")) {
                     user.setAddress(newAddress);
                     System.out.println("Password change is correct");
                     List<User> list = new ArrayList<>();
                     list.add(user);
-                    CSVUtils.write(PATHLOGIN,list);
-                    CSVUtils.write(PATHUSER,fullUser);
+                    CSVUtils.write(PATHLOGIN, list);
+                    CSVUtils.write(PATHUSER, fullUser);
                     return;
                 }
             }
-            System.out.println("Can't find user this ID, please check again.");
+            System.err.println("Can't find user this ID, please check again.");
         }
     }
 
@@ -166,13 +169,13 @@ public class UserManagement implements IUserManagement {
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
                 System.out.println(InstantUtils.userFormat(user));
-                if (AppUtils.areYouSure("change Phone number")){
+                if (AppUtils.areYouSure("change Phone number")) {
                     user.setMobile(newPhoneNumber);
                     System.out.println("Password change is correct");
                     List<User> list = new ArrayList<>();
                     list.add(user);
-                    CSVUtils.write(PATHLOGIN,list);
-                    CSVUtils.write(PATHUSER,fullUser);
+                    CSVUtils.write(PATHLOGIN, list);
+                    CSVUtils.write(PATHUSER, fullUser);
                     return;
                 }
             }

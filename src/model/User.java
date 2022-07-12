@@ -128,11 +128,11 @@ public class User {
         String address = strings[6].trim();
         String ROLE = strings[7].trim();
         Instant createAt = Instant.parse(strings[8].trim());
-        Instant updateAt= null;
-        String temp = strings[9];
-        if (temp==null&&temp.equals("null")){
-            updateAt = Instant.parse(temp);
-        }
+        Instant updateAt=Instant.parse(strings[9].trim());
+//        String temp = strings[9];
+//        if (temp==null&&temp.equals("null")){
+//            updateAt = Instant.parse(temp);
+//        }
         return new User(ID,userName,password,fullName,mobile,email,address,ROLE,createAt,updateAt);
     }
     public String toString(){

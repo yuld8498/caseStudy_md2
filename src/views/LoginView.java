@@ -4,100 +4,101 @@ import model.User;
 import service.UserService;
 import util.AppUtils;
 import util.CSVUtils;
-import util.InstantUtils;
-import util.ValidateUtils;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoginView {
-    private static final String USERLIST = "src\\data\\login.csv";
+    private static final String USERLIST = "data\\login.csv";
     UserService userService = UserService.getInstance();
-    public void laucherLogin(){
-        boolean again;
+
+    public void laucherLogin() {
         int chose;
         do {
-            System.out.println("==================== LOGIN ======================");
-            System.out.printf("%10s%s","","1. Login By Admin\n");
-            System.out.printf("%10s%s","","2. Login By User\n");
-            System.out.printf("%10s%s","","3. Create User\n");
-            System.out.printf("%10s%s","","4. Out Program\n");
+            System.out.println("========================= LOGIN ===========================");
+            System.out.printf("%10s%s", "", "1. Login By Admin\n");
+            System.out.printf("%10s%s", "", "2. Login By User\n");
+            System.out.printf("%10s%s", "", "3. Create User\n");
+            System.out.printf("%10s%s", "", "4. Out Program\n");
+            System.out.println("============================================================");
             System.out.println("Enter you chose: ");
-            chose = AppUtils.choseAgain(1,4);
-            switch (chose){
+            chose = AppUtils.choseAgain(1, 4);
+            switch (chose) {
                 case 1:
-                    boolean repeatLoginAdmin =false;
+                    boolean repeatLoginAdmin;
                     do {
-                        if (loginAdmin()){
+                        if (loginAdmin()) {
                             AdminView adminView = new AdminView();
                             adminView.menuAdmin();
-                            repeatLoginAdmin =false;
-                        }else {
-                            repeatLoginAdmin=AppUtils.areYouSure("Login again");
+                            repeatLoginAdmin = false;
+                        } else {
+                            repeatLoginAdmin = AppUtils.areYouSure("Login again");
                         }
-                    }while (repeatLoginAdmin);
+                    } while (repeatLoginAdmin);
                     break;
                 case 2:
-                    boolean repeatLoginUser =false;
+                    boolean repeatLoginUser;
                     do {
-                        if (loginUser()){
+                        if (loginUser()) {
                             UserView userView = new UserView();
                             userView.showMenu();
-                            repeatLoginUser =false;
-                        }else {
+                            repeatLoginUser = false;
+                        } else {
                             repeatLoginUser = AppUtils.areYouSure("Login again");
                         }
-                    }while (repeatLoginUser);
+                    } while (repeatLoginUser);
                     break;
                 case 3:
                     do {
                         userService.addNewUser(userService.createUser());
-                    }while (AppUtils.areYouSure("Create more User"));
+                    } while (AppUtils.areYouSure("Create more User"));
                     break;
             }
-        }while (chose!=4);
+        } while (chose != 4);
     }
-    public boolean loginAdmin(){
+
+    public boolean loginAdmin() {
         System.out.print("Enter Admin Username: ");
         String User = AppUtils.inputStringAgain("Admin Username");
         System.out.print("Enter Admin password: ");
         String password = AppUtils.inputStringAgain("Password");
-        for (User user : userService.findAll()){
-            if (user.getPassword().equals(password)&&user.getUserName().equals(User)&&user.getROLE().equalsIgnoreCase("admin")){
+        for (User user : userService.findAll()) {
+            if (user.getPassword().equals(password) && user.getUserName().equals(User) && user.getROLE().equalsIgnoreCase("admin")) {
                 List<User> list = new ArrayList<>();
                 list.add(user);
-                CSVUtils.write(USERLIST,list);
+                CSVUtils.write(USERLIST, list);
                 return true;
             }
         }
         System.out.println("UserName or PassWord is wrong, please check again.");
         return false;
     }
-    public boolean loginUser(){
+
+    public boolean loginUser() {
         System.out.println("Enter  Username");
         String User = AppUtils.inputStringAgain("Admin Username");
         System.out.println("Enter password: ");
         String password = AppUtils.inputStringAgain("Password");
-        for (User user : userService.findAll()){
-            if (user.getPassword().equals(password)&&user.getUserName().equals(User)&&user.getROLE().equalsIgnoreCase("user")){
+        for (User user : userService.findAll()) {
+            if (user.getPassword().equals(password) && user.getUserName().equals(User) && user.getROLE().equalsIgnoreCase("user")) {
                 List<User> list = new ArrayList<>();
                 list.add(user);
-                CSVUtils.write(USERLIST,list);
+                CSVUtils.write(USERLIST, list);
                 return true;
             }
         }
         System.out.println("UserName or PassWord is wrong, please check again.");
         return false;
     }
-    public static User callUser(){
-        User user = null ;
-        List<String> record = CSVUtils.read("src\\data\\login.csv");
-        for (String s : record) {
-            user = User.parseUser(s);
-        }
-        return user;
-    }
+}
+//    public static User callUser(){
+//        User user = null ;
+//        List<String> record = CSVUtils.read("data\\login.csv");
+//        for (String s : record) {
+//            user = User.parseUser(s);
+//        }
+//        return user;
+//    }
 //    public User createUser(){
 //        System.out.println("Enter UserName: ");
 //        String userName;
@@ -148,4 +149,3 @@ public class LoginView {
 //        Long ID = System.currentTimeMillis()/1000;
 //        return new User(ID,userName,password,fullName,phoneNumber,email,address,ROLE,createAt,updateAt);
 //    }
-}

@@ -2,7 +2,7 @@ package model;
 
 import java.time.Instant;
 
-public class Product {
+public class Book {
     private Long ID;
     private String name;
     private String author;
@@ -11,10 +11,10 @@ public class Product {
     private Instant createdAt;
     private Instant updateAt;
 
-    public Product() {
+    public Book() {
     }
 
-    public Product(Long ID,String name,String author,Double price,int quaility) {
+    public Book(Long ID, String name, String author, Double price, int quaility) {
         this.ID = ID;
         this.name = name;
         this.author = author;
@@ -22,7 +22,7 @@ public class Product {
         this.quaility = quaility;
     }
 
-    public Product(Long ID,String name,String author,int quaility,Double price,Instant createdAt,Instant updateAt) {
+    public Book(Long ID, String name, String author, int quaility, Double price, Instant createdAt, Instant updateAt) {
         this.ID = ID;
         this.name = name;
         this.author = author;
@@ -33,7 +33,7 @@ public class Product {
 
     }
 
-    public static Product parseProduct(String string){
+    public static Book parseProduct(String string){
         String[] strings =string.split(",");
         Long ID = Long.parseLong(strings[0].trim());
         String name = strings[1].trim();
@@ -41,12 +41,12 @@ public class Product {
         int quaility = Integer.parseInt(strings[3].trim());
         Double price = Double.parseDouble(strings[4].trim());
         Instant createdAt = Instant.parse(strings[5].trim());
-        Instant updateAt= null;
-        String temp = strings[6].trim();
-        if (temp==null&&temp.equals("null")){
-            updateAt = Instant.parse(temp);
-        }
-        return new Product(ID,name,author,quaility,price,createdAt,updateAt);
+        Instant updateAt= Instant.parse(strings[6].trim());
+//        String temp = strings[6].trim();
+//        if (temp==null&&temp.equals("null")){
+//            updateAt = Instant.parse(temp);
+//        }
+        return new Book(ID,name,author,quaility,price,createdAt,updateAt);
     }
 
     public Long getID() {

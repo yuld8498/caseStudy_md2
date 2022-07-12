@@ -1,13 +1,9 @@
 package util;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import model.Order;
-import model.Product;
 import model.User;
 
-import javax.print.DocFlavor;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -91,29 +87,30 @@ public class AppUtils {
         }
         return false;
     }
-    public static void bill(List<Order> list, String UserName){
-        System.out.printf("%120s","YUL BOOKs STORE\n");
-        System.out.printf("%120s","28 Nguyen Tri Phuong\n");
-        System.out.printf("%115s","Mobile: 0962435396 - 01642156169\n");
+
+    public static void bill(List<Order> list, String UserName) {
+        System.out.printf("%112s", "YUL BOOKs STORE\n");
+        System.out.printf("%112s", "28 Nguyen Tri Phuong\n");
+        System.out.printf("%107s", "Mobile: 0962435396 - 01642156169\n");
         System.out.println("-----------------------------------------------------------------------------------ORDER BILL-----------------------------------------------------------------------------------");
         System.out.println("\n");
-        System.out.printf("||%s%30d%s","Bill No.",System.currentTimeMillis()/10000,"\n\n");
-        System.out.printf("||%s%30s%s","Create at",InstantUtils.instantToString(Instant.now()),"\n\n");
-        System.out.printf("||%s%30s%s","User Order",UserName,"\n\n");
-        System.out.printf("||%s%20s%s","Cashier","ADMIN","\n\n");
-        System.out.printf("||%-70s%-50s%-45s%-45s%s","Product Name","Amount","Price","Total","\n");
-        double resul =0;
-        for (Order order : list){
-            System.out.printf("%-70s%-40s%-40s%-40s%s",order.getProductName(),order.getQuaility(),order.getPrice(),(order.getQuaility()*order.getPrice()),"\n\n");
-            resul+= order.getQuaility()*order.getPrice();
+        System.out.printf("|| %s%30d%160s", "Bill No.", System.currentTimeMillis() / 10000, "||\n\n");
+        System.out.printf("|| %s%30s%158s", "Create at", InstantUtils.instantToString(Instant.now()), "||\n\n");
+        System.out.printf("|| %s%30s%160s", "User Order", UserName, "||\n\n");
+        System.out.printf("|| %s%20s%175s", "Cashier", "ADMIN", "||\n\n");
+        System.out.printf("|| %-70s%-50s%-45s%-45s%s", "Product Name", "Amount", "Price", "Total", "||\n");
+        double resul = 0;
+        for (Order order : list) {
+            System.out.printf("%-70s%-40s%-40s%-40s%s", order.getProductName(), order.getQuaility(), order.getPrice(), (order.getQuaility() * order.getPrice()), "\n\n");
+            resul += order.getQuaility() * order.getPrice();
         }
-        System.out.println("RESULT:          " + InstantUtils.doubleToVND(resul));
-        System.out.printf("%s","Thank's for using our service!\n");
+        System.out.println("\n\nRESULT:                                                            " + InstantUtils.doubleToVND(resul));
+        System.out.printf("%s", "Thank's for using our service!\n");
     }
 
-    public static User callUser(){
-        User user = null ;
-        List<String> record = CSVUtils.read("src\\data\\login.csv");
+    public static User callUser() {
+        User user = null;
+        List<String> record = CSVUtils.read("data\\login.csv");
         for (String s : record) {
             user = User.parseUser(s);
         }

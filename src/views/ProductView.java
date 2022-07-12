@@ -1,27 +1,22 @@
 package views;
 
-import model.Product;
+import model.Book;
 import service.ProduceService;
-import service.UserManagement;
 import util.AppUtils;
-import util.CSVUtils;
-import util.InstantUtils;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class ProductView {
-    private static final Scanner SCANNER = new Scanner(System.in);
     private static ProductView instance;
-    private ProductView(){
+
+    private ProductView() {
     }
+
     public static ProductView getInstance() {
         if (instance == null)
             instance = new ProductView();
         return instance;
     }
+
     ProduceService produceService;
 
     public void menuProduct() {
@@ -39,6 +34,7 @@ public class ProductView {
             System.out.printf("%10s%s", "", "8. Sort Products List for Quaility ASC\n");
             System.out.printf("%10s%s", "", "9. Sort Products List for Quaility ESC\n");
             System.out.printf("%10s%s", "", "10. Back to Menu Admin\n");
+            System.out.println("====================================================================");
             chose = AppUtils.choseAgain(1, 10);
             switch (chose) {
                 case 1:
@@ -56,9 +52,15 @@ public class ProductView {
                 case 4:
                     System.out.println("Enter the product ID you want to update: ");
                     Long id = AppUtils.retryParseLong();
-                    Product product = produceService.createProduct();
-                    product.setID(id);
-                    produceService.updateProduct(product);
+                    for (Book book : produceService.findAll()) {
+                        if (book.getID().equals(id)) {
+                            Book books = produceService.createProduct();
+                            books.setID(id);
+                            produceService.updateProduct(books);
+                            return;
+                        }
+                    }
+                    System.out.println("Can't find this ID, please check again.");
                     break;
                 case 5:
                     System.out.println("Enter the product ID you want to update quaility: ");

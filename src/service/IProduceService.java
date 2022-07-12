@@ -1,31 +1,31 @@
 package service;
 
-import model.Product;
+import model.Book;
 
 import java.util.List;
 
 public interface IProduceService {
-    List<Product> findAll();
+    List<Book> findAll();
 
-    Product findProductByID(Long id);
+    Book findProductByID(Long id);
 
-    Product findProductbyName(String name);
+    Book findProductbyName(String name);
 
-    void addProduct(Product product);
+    void addProduct(Book book);
 
-    void updateProduct(Product newProduct);
+    void updateProduct(Book newBook);
 
     void removeProductByID(Long productID);
 
-    Product sortQuantityASC();
+    Book sortQuantityASC();
 
-    Product sortQuantityESC();
+    Book sortQuantityESC();
 
     void updateQuaility(long id, int newQuaility);
 
-    void showListProduct(List<Product> list);
+    void showListProduct(List<Book> list);
 
-    Product createProduct();
+    Book createProduct();
 
     void findByAuthorName(String authorName);
 }

@@ -1,25 +1,19 @@
 package views;
 
-import model.Order;
-import model.Product;
 import model.User;
 import service.LoanProductService;
-import service.ProduceService;
 import service.UserManagement;
-import service.UserService;
 import util.AppUtils;
 import util.CSVUtils;
 import util.InstantUtils;
 import util.ValidateUtils;
 
-import javax.swing.*;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserView {
-    private static final String PATHUSER = "src\\data\\login.csv";
-    UserManagement userManagement = UserManagement.getInstance();;
+    UserManagement userManagement = UserManagement.getInstance();
+
     public void showMenu() {
         int chose;
         do {
@@ -29,6 +23,7 @@ public class UserView {
             System.out.printf("%10s%s", "", "3. Order Service\n");
             System.out.printf("%10s%s", "", "4. Loan Items\n");
             System.out.printf("%10s%s", "", "5. Back to menu\n");
+            System.out.println("=====================================================");
             System.out.println("Enter chose : ");
             chose = AppUtils.choseAgain(1, 5);
             switch (chose) {
@@ -47,7 +42,7 @@ public class UserView {
                     break;
                 case 5:
                     List<User> list = new ArrayList<>();
-                    CSVUtils.write("src\\data\\login.csv", list);
+                    CSVUtils.write("data\\login.csv", list);
                     break;
             }
         } while (chose != 5);
@@ -64,9 +59,10 @@ public class UserView {
             System.out.printf("%10s%s", "", "4. Show list Loanding\n");
             System.out.printf("%10s%s", "", "5. Confirm\n");
             System.out.printf("%10s%s", "", "6. Back \n");
+            System.out.println("======================================================");
             System.out.println("Enter you chose: ");
             chose = AppUtils.choseAgain(1, 6);
-            switch (chose){
+            switch (chose) {
                 case 1:
                     loanProductService.showLoanList();
                     break;
@@ -83,7 +79,7 @@ public class UserView {
                     loanProductService.confirmLoanList();
                     break;
             }
-        } while (chose != 5);
+        } while (chose != 6);
 
     }
 
@@ -97,6 +93,7 @@ public class UserView {
             System.out.printf("%10s%s", "", "4. Change address\n");
             System.out.printf("%10s%s", "", "5. Change full name\n");
             System.out.printf("%10s%s", "", "6. Back to menu\n");
+            System.out.println("==============================================================");
             System.out.println("Enter chose : ");
             chose = AppUtils.choseAgain(1, 6);
             switch (chose) {

@@ -6,10 +6,10 @@ import java.util.List;
 
 public class CSVUtils {
     //ghi file
-    public static <T> void write(String path, List<T> items){
+    public static <T> void write(String path, List<T> items) {
         try {
             PrintWriter printWriter = new PrintWriter(path);
-            for (T item : items){
+            for (T item : items) {
                 printWriter.println(item.toString());
             }
             printWriter.flush();
@@ -18,14 +18,15 @@ public class CSVUtils {
             throw new RuntimeException(e);
         }
     }
+
     //doc file
-    public static List<String> read(String path){
+    public static List<String> read(String path) {
         List<String> lines = new ArrayList<>();
-        File file =new File(path);
+        File file = new File(path);
         try {
-            BufferedReader bufferedReader =new BufferedReader(new FileReader(file));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line;
-            while ((line = bufferedReader.readLine())!=null&&!line.trim().isEmpty()){
+            while ((line = bufferedReader.readLine()) != null && !line.trim().isEmpty()) {
                 lines.add(line);
             }
         } catch (FileNotFoundException e) {
