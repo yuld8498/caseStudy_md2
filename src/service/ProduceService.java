@@ -43,7 +43,9 @@ public class ProduceService implements IProduceService {
         for (Book book : list) {
             if (book.getID().equals(id)) {
                 System.out.println("Product you want to find : ");
+                System.out.printf("\n\t%8s%50s%58s%28s%18s%28s\n", "ID", "Name", "Author", "Quaility", "Price", "Create At\n");
                 System.out.println(InstantUtils.productFomat(book));
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 return book;
             }
         }
@@ -53,15 +55,21 @@ public class ProduceService implements IProduceService {
 
     @Override
     public Book findProductbyName(String name) {
+        int count =0;
+        String nameIgnoreCase = name.toLowerCase();
         List<Book> list = new ArrayList<>(findAll());
+        System.out.println("Product you want to find : ");
+        System.out.printf("\n\t%8s%50s%58s%28s%18s%28s\n", "ID", "Name", "Author", "Quaility", "Price", "Create At\n");
         for (Book book : list) {
-            if (book.getName().equalsIgnoreCase(name)) {
-                System.out.println("Product you want to find : ");
+            if (book.getName().toLowerCase().contains(nameIgnoreCase)) {
                 System.out.println(InstantUtils.productFomat(book));
-                return book;
+                count++;
             }
         }
-        System.out.println("Cant find this ID, please check again!");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        if (count==0){
+            System.out.println("Cant find this NAME, please check again!");
+        }
         return null;
     }
 
@@ -83,6 +91,10 @@ public class ProduceService implements IProduceService {
                 }
             }
         }
+        System.out.printf("\n\t%8s%50s%58s%28s%18s%28s\n", "ID", "Name", "Author", "Quaility", "Price", "Create At\n");
+        System.out.println(InstantUtils.productFomat(newBook));
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
         if (AppUtils.areYouSure("Add new Product")) {
             list.add(newBook);
             CSVUtils.write(PATHPRODUCT, list);
@@ -92,27 +104,33 @@ public class ProduceService implements IProduceService {
 
     @Override
     public void updateProduct(Book newBook) {
-        newBook.setCreatedAt(Instant.now());
         List<Book> list = findAll();
         for (Book book : list) {
             if (newBook.getID().equals(book.getID())) {
                 System.out.println("Product after to change:");
                 System.out.println(InstantUtils.productFomat(book));
                 System.out.println("Product after to change");
+                System.out.printf("\n\t%8s%50s%58s%28s%18s%28s\n", "ID", "Name", "Author", "Quaility", "Price", "Create At\n");
                 System.out.println(InstantUtils.productFomat(newBook));
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
                 if (AppUtils.areYouSure("Update")) {
                     book.setName(newBook.getName());
                     book.setAuthor(newBook.getAuthor());
                     book.setQuaility(newBook.getQuaility());
                     book.setPrice(newBook.getPrice());
                     book.setUpdateAt(Instant.now());
+                    book.setCreatedAt(newBook.getCreatedAt());
                     System.out.println("Update succesful.");
                     CSVUtils.write(PATHPRODUCT, list);
+                    return;
+                }else {
+                    System.out.println("Update Book in List is cancel");
                     return;
                 }
             }
         }
-        System.err.println("Can't find this product in product list");
+        System.out.println("Can't find this product in product list");
         // thêm xác nh?n có thêm vào danh sách
     }
 
@@ -121,6 +139,7 @@ public class ProduceService implements IProduceService {
         List<Book> list = findAll();
         for (Book book : list) {
             if (productID.equals(book.getID())) {
+                System.out.printf("\n\t%8s%50s%58s%28s%18s%28s\n", "ID", "Name", "Author", "Quaility", "Price", "Create At\n");
                 System.out.println(InstantUtils.productFomat(book));
                 boolean check = AppUtils.areYouSure("delete");
                 if (check) {
@@ -128,10 +147,13 @@ public class ProduceService implements IProduceService {
                     CSVUtils.write(PATHPRODUCT, list);
                     System.out.println("Delete is success!");
                     return;
+                }else {
+                    System.out.println("Delete" + book.getName() + " is cancel");
+                    return;
                 }
             }
         }
-        System.err.println("Can't find this ID, please check again.");
+        System.out.println("Can't find this ID, please check again.");
     }
 
     @Override
@@ -143,10 +165,12 @@ public class ProduceService implements IProduceService {
                 return o1.getQuaility() - o2.getQuaility();
             }
         });
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         System.out.printf("\n\t%8s%50s%58s%28s%18s%28s\n", "ID", "Name", "Author", "Quaility", "Price", "Create At\n");
         for (Book book : list) {
             System.out.println(InstantUtils.productFomat(book));
         }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         return null;
     }
 
@@ -159,10 +183,12 @@ public class ProduceService implements IProduceService {
                 return o2.getQuaility() - o1.getQuaility();
             }
         });
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         System.out.printf("\n\t%8s%50s%58s%28s%18s%28s\n", "ID", "Name", "Author", "Quaility", "Price", "Create At\n");
         for (Book book : list) {
             System.out.println(InstantUtils.productFomat(book));
         }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         return null;
     }
 
@@ -177,7 +203,7 @@ public class ProduceService implements IProduceService {
                 return;
             }
         }
-        System.err.println("Can't find this ID, please check again.");
+        System.out.println("Can't find this ID, please check again.");
     }
 
     @Override
@@ -209,13 +235,16 @@ public class ProduceService implements IProduceService {
     @Override
     public void showListProduct(List<Book> list) {
         int count = 0;
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         System.out.printf("\n\t%8s%50s%58s%28s%18s%28s%38s\n", "ID", "Name", "Author", "Quaility", "Price", "Create At", "Update At\n");
         for (Book book : list) {
             System.out.println(InstantUtils.productFomat(book));
             count++;
         }
         if (count == 0) {
-            System.err.println("Order list is empty.");
+            System.out.println("Order list is empty.");
+        }else {
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         }
     }
 }

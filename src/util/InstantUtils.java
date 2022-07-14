@@ -29,7 +29,7 @@ public class InstantUtils {
 
 
     public static String doubleToVND(double value) {
-        String patternVND = ",### VND";
+        String patternVND = "###,###,### VND";
         DecimalFormat decimalFormat = new DecimalFormat(patternVND);
         return decimalFormat.format(value);
     }
@@ -47,7 +47,7 @@ public class InstantUtils {
     }
 
     public static String orderFomat(Order order) {
-        return String.format("\n\t%-48d%-78s%-24d%-24.2s%-48s%-28s%-28s%-28s%-28s",
+        return String.format("\n\t%-48d%-78s%-24d%-24s%-48s%-28s%-28s%-28s%-28s",
                 order.getID(),
                 order.getProductName(),
                 order.getQuaility(),

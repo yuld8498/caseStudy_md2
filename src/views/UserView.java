@@ -104,6 +104,8 @@ public class UserView {
                         newPw = AppUtils.inputStringAgain("pw");
                         if (ValidateUtils.isPasswordValid(newPw)) {
                             userManagement.changepassword(callUser().getID(), newPw);
+                        }else {
+                            System.out.println("Password is not valid, please input again.");
                         }
                     } while (!ValidateUtils.isPasswordValid(newPw));
                     break;
@@ -114,6 +116,8 @@ public class UserView {
                         newPN = AppUtils.inputStringAgain("Phone number");
                         if (ValidateUtils.isPhoneValid(newPN)) {
                             userManagement.changePhoneNumber(callUser().getID(), newPN);
+                        }else {
+                            System.out.println("Phone Number is not valid, please input again.");
                         }
                     } while (!ValidateUtils.isPhoneValid(newPN));
                     break;
@@ -124,6 +128,8 @@ public class UserView {
                         newEmail = AppUtils.inputStringAgain("email");
                         if (ValidateUtils.isEmailValid(newEmail)) {
                             userManagement.changePhoneNumber(callUser().getID(), newEmail);
+                        }else {
+                            System.out.println("Email is not valid, please input again.");
                         }
                     } while (!ValidateUtils.isEmailValid(newEmail));
                     break;
@@ -143,7 +149,7 @@ public class UserView {
 
     public static User callUser() {
         User user = null;
-        List<String> record = CSVUtils.read("src\\data\\login.csv");
+        List<String> record = CSVUtils.read("data\\login.csv");
         for (String s : record) {
             user = User.parseUser(s);
         }

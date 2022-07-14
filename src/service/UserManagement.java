@@ -37,9 +37,15 @@ public class UserManagement implements IUserManagement {
     public List<User> findAllUser() {
         List<User> userList = new ArrayList<>();
         List<String> record = CSVUtils.read(PATHUSER);
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+        System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s%45s\n",
+                "ID", "user Name", "Password", "Full Name", "Mobile", "Email", "Address", "Create At", "Update At\n");
         for (String string : record) {
             userList.add(User.parseUser(string));
         }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
         return userList;
     }
 
@@ -47,11 +53,17 @@ public class UserManagement implements IUserManagement {
     public void showInfodmation(Long userID) {
         for (User user : findAllUser()) {
             if (user.getID().equals(userID)) {
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+                System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s%45s\n",
+                        "ID", "user Name", "Password", "Full Name", "Mobile", "Email", "Address", "Create At", "Update At\n");
                 System.out.println(InstantUtils.userFormat(user));
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
                 return;
             }
         }
-        System.err.println("Can't find user this ID, please check again.");
+        System.out.println("Can't find user this ID, please check again.");
     }
 
     @Override
@@ -61,7 +73,7 @@ public class UserManagement implements IUserManagement {
                 System.out.println(InstantUtils.userFormat(user));
                 System.out.println("\n");
             }
-            System.err.println("Can't find user this ID, please check again.");
+            System.out.println("Can't find user this ID, please check again.");
         }
     }
 
@@ -80,7 +92,7 @@ public class UserManagement implements IUserManagement {
                     return;
                 }
             }
-            System.err.println("Can't find user this ID, please check again.");
+            System.out.println("Can't find user this ID, please check again.");
         }
     }
 
@@ -99,7 +111,7 @@ public class UserManagement implements IUserManagement {
                     return;
                 }
             }
-            System.err.println("Can't find user this ID, please check again.");
+            System.out.println("Can't find user this ID, please check again.");
         }
     }
 
@@ -119,7 +131,7 @@ public class UserManagement implements IUserManagement {
                     return;
                 }
             }
-            System.err.println("Can't find user this ID, please check again.");
+            System.out.println("Can't find user this ID, please check again.");
         }
     }
 
@@ -139,7 +151,7 @@ public class UserManagement implements IUserManagement {
                     return;
                 }
             }
-            System.err.println("Can't find user this ID, please check again.");
+            System.out.println("Can't find user this ID, please check again.");
         }
     }
 
@@ -159,7 +171,7 @@ public class UserManagement implements IUserManagement {
                     return;
                 }
             }
-            System.err.println("Can't find user this ID, please check again.");
+            System.out.println("Can't find user this ID, please check again.");
         }
     }
 

@@ -2,26 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbfbf984-cbfd-4ab1-8f03-3abee2013f94" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data/OrderItem.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/data/OrderItem.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/data/User.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/data/login.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/data/product.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/data/revenue.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/model/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/service/IOrderItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/IOrderItemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Module2/service/IProduceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/IProduceService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/OrderItem.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/OrderItem.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/product.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/product.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/revenue.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/revenue.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/service/LoanProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/LoanProductService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/service/OrderItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/OrderItemService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/service/ProduceService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/ProduceService$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/service/ProduceService$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/ProduceService$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/service/ProduceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/ProduceService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/service/UserManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/UserManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Module2/service/UserService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/UserService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Module2/service/UserService$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/UserService$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/service/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/util/AppUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/util/AppUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Module2/util/CSVUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/util/CSVUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/util/InstantUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/util/InstantUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Module2/util/ValidateUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/util/ValidateUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/views/AdminView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/views/AdminView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/views/LoginView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/views/LoginView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/views/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/views/Main.class" afterDir="false" />
@@ -29,26 +26,15 @@
       <change beforePath="$PROJECT_DIR$/out/production/Module2/views/ProductView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/views/ProductView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/views/UserView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/views/UserView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Module2/views/UserViewByAdmin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Module2/views/UserViewByAdmin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/OrderItem.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/User.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/User.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/login.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/login.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/product.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/product.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/revenue.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/revenue.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/IOrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/IOrderItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/IProduceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/IProduceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/LoanProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/LoanProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/OrderItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/OrderItemService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/ProduceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ProduceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/UserManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/UserManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/AppUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/AppUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/InstantUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/InstantUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/ValidateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ValidateUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/AdminView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AdminView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/OrderItemView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/OrderItemView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/ProductView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ProductView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/UserView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/UserViewByAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserViewByAdmin.java" afterDir="false" />
@@ -69,6 +55,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.jdks/corretto-18.0.1/lib/src.zip!/java.base/java/util/List.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -78,15 +67,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Module2/Case/CaseStudy&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Final_MD2/MD2_Test_TH",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\CaseStudy\Module2" />
@@ -106,6 +96,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Module2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.Main" />
       <module name="Module2" />
@@ -119,25 +116,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderItemView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="views.OrderItemView" />
+    <configuration name="TestRam.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestRam.Main" />
       <module name="Module2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="views.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="views.test" />
-      <module name="Module2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="views.*" />
+          <option name="PATTERN" value="TestRam.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -161,10 +145,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.views.Main" />
+        <item itemvalue="Application.TestRam.Main" />
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.DateDiff" />
-        <item itemvalue="Application.test" />
-        <item itemvalue="Application.OrderItemView" />
       </list>
     </recent_temporary>
   </component>
@@ -184,7 +168,8 @@
       <workItem from="1657310813632" duration="14701000" />
       <workItem from="1657419214739" duration="22238000" />
       <workItem from="1657504026199" duration="19585000" />
-      <workItem from="1657588276828" duration="14353000" />
+      <workItem from="1657588276828" duration="38125000" />
+      <workItem from="1657760548870" duration="11315000" />
     </task>
     <servers />
   </component>
@@ -201,5 +186,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

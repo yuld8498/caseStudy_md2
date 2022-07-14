@@ -47,9 +47,16 @@ public class UserService implements IUserService {
                 return (int) (o1.getID() - o2.getID());
             }
         });
+        System.out.println("User list: ");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+        System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s%45s\n",
+                "ID", "user Name", "Password", "Full Name", "Mobile", "Email", "Address", "Create At", "Update At\n");
         for (User user : list) {
             System.out.println(InstantUtils.userFormat(user));
         }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
     }
 
     @Override
@@ -64,9 +71,16 @@ public class UserService implements IUserService {
                 return (int) (o2.getID() - o1.getID());
             }
         });
+        System.out.println("User list: ");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+        System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s%45s\n",
+                "ID", "user Name", "Password", "Full Name", "Mobile", "Email", "Address", "Create At", "Update At\n");
         for (User user : list) {
             System.out.println(InstantUtils.userFormat(user));
         }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
     }
 
     @Override
@@ -76,13 +90,19 @@ public class UserService implements IUserService {
         boolean repeat;
         do {
             userName = AppUtils.inputStringAgain("UserName");
-            repeat = !existsByUserName(userName);
+            repeat = (!existsByUserName(userName)&&ValidateUtils.isUsernameValid(userName));
             if (!repeat) {
-                System.out.println(userName + " already exists");
+                if (!(ValidateUtils.isUsernameValid(userName))){
+                    System.out.println("User name is not valid");
+                }else {
+                    System.out.println("User name is already exists");
+                }
+                System.out.println("Enter again:");
             } else {
                 System.out.println(userName + "is valid");
             }
         } while (!repeat);
+
         System.out.println("Enter password: ");
         String password;
         do {
@@ -90,28 +110,42 @@ public class UserService implements IUserService {
             repeat = !ValidateUtils.isPasswordValid(password);
             if (repeat) {
                 System.out.println("Password is not valid");
+                System.out.println("Enter again");
             }
         } while (repeat);
+
         System.out.println("Enter Full name: ");
         String fullName = AppUtils.inputStringAgain("Full name");
+
         System.out.println("Enter phone number: ");
         String phoneNumber;
         do {
             phoneNumber = AppUtils.inputStringAgain("Phone Number");
-            repeat = (ValidateUtils.isPhoneValid(phoneNumber) && !existsByPhoneNumber(phoneNumber));
+            repeat = (ValidateUtils.isPhoneValid(phoneNumber) && !(existsByPhoneNumber(phoneNumber)));
             if (!repeat) {
-                System.out.println("Phone Number is not valid");
+                if (!(ValidateUtils.isPhoneValid(phoneNumber))){
+                    System.out.println("Phone Number is not valid");
+                }else {
+                    System.out.println("Phone Number is already exists");
+                }
+                System.out.println("Enter phone number again: ");
             }
         } while (!repeat);
+
         System.out.println("Enter Full email: ");
         String email;
         do {
             email = AppUtils.inputStringAgain("email");
-            repeat = !(ValidateUtils.isEmailValid(email) && !existsByEmail(email));
-            if (repeat) {
-                System.out.println("email is not valid");
+            repeat = (ValidateUtils.isEmailValid(email) && !(existsByEmail(email)));
+            if (!repeat) {
+                if (!(ValidateUtils.isEmailValid(email))){
+                    System.out.println("Email is not valid");
+                }else {
+                    System.out.println("Email is already exists");
+                }
+                System.out.println("Enter Email again: ");
             }
-        } while (repeat);
+        } while (!repeat);
         System.out.println("Enter Full address: ");
         String address = AppUtils.inputStringAgain("address");
         Instant createAt = Instant.now();
@@ -149,7 +183,13 @@ public class UserService implements IUserService {
                 return;
             }
         }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+        System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s%45s\n",
+                "ID", "user Name", "Password", "Full Name", "Mobile", "Email", "Address", "Create At", "Update At\n");
         System.out.println(InstantUtils.userFormat(newUser));
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
         if (AppUtils.areYouSure("Add new User")) {
             userList.add(newUser);
             CSVUtils.write(PATHUSER, userList);
@@ -164,7 +204,13 @@ public class UserService implements IUserService {
         List<User> list = findAll();
         for (User user : list) {
             if (user.getID().equals(userID)) {
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+                System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s%45s\n",
+                        "ID", "user Name", "Password", "Full Name", "Mobile", "Email", "Address", "Create At", "Update At\n");
                 System.out.println(InstantUtils.userFormat(user));
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
                 if (AppUtils.areYouSure("Delete User")) {
                     list.remove(user);
                     CSVUtils.write(PATHUSER, list);
@@ -175,7 +221,7 @@ public class UserService implements IUserService {
                 return;
             }
         }
-        System.err.println("Can't find this ID, please check again.");
+        System.out.println("Can't find this ID, please check again.");
     }
 
     @Override
@@ -204,19 +250,24 @@ public class UserService implements IUserService {
                 return;
             }
         }
-        System.err.println("Can't find this User in user list, please check again.");
+        System.out.println("Can't find this User in user list, please check again.");
     }
 
     @Override
     public User findUserByID(Long ID) {
         for (User user : findAll()) {
             if (user.getID().equals(ID)) {
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
                 System.out.println("User you want to find: ");
+                System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s%45s\n",
+                        "ID", "user Name", "Password", "Full Name", "Mobile", "Email", "Address", "Create At", "Update At\n");
                 System.out.println(InstantUtils.userFormat(user));
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 return user;
             }
         }
-        System.err.println("can't find this ID.");
+        System.out.println("can't find this ID.");
         return null;
     }
 
@@ -224,17 +275,21 @@ public class UserService implements IUserService {
     public void findUserByName(String name) {
         for (User user : findAll()) {
             if (user.getUserName().equals(name)) {
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+                System.out.printf("%10s%34s%26s%32s%35s%40s%65s%45s%45s\n",
+                        "ID", "user Name", "Password", "Full Name", "Mobile", "Email", "Address", "Create At", "Update At\n");
                 System.out.println(InstantUtils.userFormat(user));
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
                 return;
             }
         }
-        System.err.println("Can't find this User name, please check again.");
+        System.out.println("Can't find this User name, please check again.");
     }
 
     @Override
     public boolean existsByID(Long ID) {
-        List<User> users = new ArrayList<>();
-        for (User user : users) {
+        for (User user : findAll()) {
             if (user.getID() == ID) {
                 return true;
             }
@@ -244,8 +299,7 @@ public class UserService implements IUserService {
 
     @Override
     public boolean existsByUserName(String username) {
-        List<User> users = new ArrayList<>();
-        for (User user : users) {
+        for (User user : findAll()) {
             if (user.getUserName().equalsIgnoreCase(username)) {
                 return true;
             }
@@ -255,9 +309,8 @@ public class UserService implements IUserService {
 
     @Override
     public boolean existsByPhoneNumber(String phoneNumber) {
-        List<User> users = new ArrayList<>();
-        for (User user : users) {
-            if (user.getMobile().equalsIgnoreCase(phoneNumber)) {
+        for (User user : findAll()) {
+            if (user.getMobile().equals(phoneNumber)) {
                 return true;
             }
         }
@@ -266,8 +319,7 @@ public class UserService implements IUserService {
 
     @Override
     public boolean existsByEmail(String email) {
-        List<User> users = new ArrayList<>();
-        for (User user : users) {
+        for (User user : findAll()) {
             if (user.getEmail().equalsIgnoreCase(email)) {
                 return true;
             }

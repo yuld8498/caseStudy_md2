@@ -4,6 +4,8 @@ import model.Book;
 import service.ProduceService;
 import util.AppUtils;
 
+import java.time.Instant;
+
 
 public class ProductView {
     private static ProductView instance;
@@ -56,6 +58,8 @@ public class ProductView {
                         if (book.getID().equals(id)) {
                             Book books = produceService.createProduct();
                             books.setID(id);
+                            books.setCreatedAt(book.getCreatedAt());
+                            books.setUpdateAt(Instant.now());
                             produceService.updateProduct(books);
                             return;
                         }

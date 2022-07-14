@@ -50,10 +50,20 @@ public class OrderItemService implements IOrderItemService {
 
     @Override
     public void findByName(String name) {
-        for (Book book : findAllProduct()) {
-            if (book.getName().equalsIgnoreCase(name)) {
+        int count = 0;
+        String nameIgnoreCase = name.toLowerCase();
+        List<Book> list = findAllProduct();
+        System.out.println("Product you want to find : ");
+        System.out.printf("\n\t%8s%50s%58s%28s%18s%28s\n", "ID", "Name", "Author", "Quaility", "Price", "Create At\n");
+        for (Book book : list) {
+            if (book.getName().toLowerCase().contains(nameIgnoreCase)) {
                 System.out.println(InstantUtils.productFomat(book));
+                count++;
             }
+        }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        if (count == 0) {
+            System.out.println("Cant find this NAME, please check again!");
         }
     }
 
@@ -89,7 +99,7 @@ public class OrderItemService implements IOrderItemService {
                 }
             }
         }
-        System.err.println("Can't find this ID, please check again.");
+        System.out.println("Can't find this ID, please check again.");
         return null;
     }
 
@@ -104,10 +114,17 @@ public class OrderItemService implements IOrderItemService {
 
     @Override
     public void showOrderList() {
+        int count = 0;
         for (Order order : findAllOrder()) {
             if ((order.getNote().equalsIgnoreCase("order") && order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName())) || callUser().getROLE().equalsIgnoreCase("Admin")) {
                 System.out.println(InstantUtils.orderFomat(order));
+                count++;
             }
+        }
+        if (count == 0) {
+            System.out.println("Order list is empty.");
+        } else {
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         }
     }
 
@@ -116,6 +133,7 @@ public class OrderItemService implements IOrderItemService {
         List<Order> list = new ArrayList<>(findAllOrder());
         for (Order order : list) {
             if (order.getID().equals(ID) && order.getNote().equalsIgnoreCase("order")) {
+                System.out.println(InstantUtils.orderFomat(order));
                 if (AppUtils.areYouSure("Delete product in order list")) {
                     list.remove(order);
                     CSVUtils.write(PATHORDER, list);
@@ -124,7 +142,7 @@ public class OrderItemService implements IOrderItemService {
                 }
             }
         }
-        System.err.println("Can't find this ID, please check again.");
+        System.out.println("Can't find this ID, please check again.");
     }
 
 
@@ -133,9 +151,10 @@ public class OrderItemService implements IOrderItemService {
         List<Order> newlist = new ArrayList<>();
         List<Order> list = new ArrayList<>(findAllOrder());
         for (Order order : list) {
-            if (order.getNote().equalsIgnoreCase("loan")) {
-                newlist.add(order);
+            if (callUser().getUserName().equalsIgnoreCase(order.getUserNameOrder()) && order.getNote().equalsIgnoreCase("order")) {
+                continue;
             }
+            newlist.add(order);
         }
         if (AppUtils.areYouSure("Clear order list")) {
             CSVUtils.write(PATHORDER, newlist);
@@ -163,7 +182,7 @@ public class OrderItemService implements IOrderItemService {
         }
 
         if (count == 0) {
-            System.err.println("Order list is empty, please add product to list.");
+            System.out.println("Order list is empty, please add product to list.");
         } else {
             System.out.println("Complete!");
         }
@@ -197,7 +216,7 @@ public class OrderItemService implements IOrderItemService {
         }
         CSVUtils.write(PATHREVENUE, orderList);
         if (list.size() == 0) {
-            System.err.println("Confirm order is empty, please check order list or User cashier.");
+            System.out.println("Confirm order is empty, please check order list or User cashier.");
         }
         return list;
     }
@@ -216,34 +235,32 @@ public class OrderItemService implements IOrderItemService {
         int count = 0;
         int name = 0;
         for (Order order : list) {
-            if (order.getUserNameOrder().equalsIgnoreCase(userName) && order.getProductName().equalsIgnoreCase(bookName)) {
+            if (order.getUserNameOrder().equalsIgnoreCase(userName) && order.getProductName().equalsIgnoreCase(bookName) && order.getNote().equalsIgnoreCase("Confirm loan")) {
                 bookname++;
                 name++;
-                if (order.getNote().equalsIgnoreCase("Confirm loan")) {
-                    for (Book book : books) {
-                        if (book.getName().equalsIgnoreCase(order.getProductName()) && book.getPrice().equals(order.getPrice() / 0.02)) {
-                            book.setQuaility(book.getQuaility() + 1);
-                            count++;
-                            if (InstantUtils.howLong(order.getCreateAt(), Instant.now()) > 7) {
-                                long money = InstantUtils.howLong(order.getCreateAt(), Instant.now()) * 2000;
-                                System.err.println("If you return the book late, you will be fined, late day penalty (2000vnd/Day ).");
-                                System.err.println("Fine amount: " + InstantUtils.howLong(order.getCreateAt(), Instant.now()) * 2000);
-                                order.setPrice(order.getPrice() + money);
-                            }
+                for (Book book : books) {
+                    if (book.getName().equalsIgnoreCase(order.getProductName()) && book.getPrice().equals(order.getPrice() / 0.02)) {
+                        book.setQuaility(book.getQuaility() + 1);
+                        count++;
+                        if ((InstantUtils.howLong(order.getCreateAt(), Instant.now())) > 7) {
+                            long money = InstantUtils.howLong(order.getCreateAt(), Instant.now()) * 2000;
+                            System.out.println("If you return the book late, you will be fined, late day penalty (2000vnd/Day ).");
+                            System.out.println("Fine amount: " + InstantUtils.howLong(order.getCreateAt(), Instant.now()) * 2000);
+                            order.setPrice(order.getPrice() + money);
                         }
                     }
-                    order.setNote("returned");
                 }
+                order.setNote("returned");
             }
         }
         if (count == 0) {
             if (bookname == 0) {
-                System.err.println("Name of book input is wrong.");
+                System.out.println("Name of book input is wrong.");
             }
             if (name == 0) {
-                System.err.println("user Name input is wrong");
+                System.out.println("user Name input is wrong");
             }
-            System.err.println("User returned all loan product.");
+            System.out.println("User returned all loan product.");
         } else {
             System.out.println("Loan product is complete.");
         }

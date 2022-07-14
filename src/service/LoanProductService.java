@@ -33,65 +33,84 @@ public class LoanProductService implements ILoanProduct {
     public void loanProducts() {
         List<Order> loanList = new ArrayList<>();
         List<String> orderList = CSVUtils.read(PATHLOAN);
+        List<String> listRevenue = CSVUtils.read(PATHREVENUE);
+        List<Order> list = new ArrayList<>();
+        System.out.print("Enter ID product want to loan: ");
+        Long id = AppUtils.retryParseLong();
+        for (String string : listRevenue){
+            list.add(Order.parseOrder(string));
+        }
         for (String s : orderList) {
             loanList.add(Order.parseOrder(s));
         }
         boolean isready;
-        Long id;
-        do {
-            System.out.print("Enter ID product want to loan: ");
-            id = AppUtils.retryParseLong();
-            for (Book book : produceService.findAll()) {
-                if (book.getID().equals(id)) {
-                    for (Order order : loanList) {
-                        if (book.getName().equalsIgnoreCase(order.getProductName()) && order.getNote().equalsIgnoreCase("loan") || book.getName().equalsIgnoreCase(order.getProductName()) && order.getNote().equalsIgnoreCase("confirm loan")) {
-                            System.out.println("This Item isready in Loan list");
+        int count = 0;
+        for (Order order : loanList) {
+            if (order.getNote().equalsIgnoreCase("loan")&&callUser().getUserName().equalsIgnoreCase(order.getUserNameOrder())) {
+                count += 1;
+            }
+        }
+        int amount=0;
+        for (Book book1 : produceService.findAll()){
+            if (book1.getID().equals(id)){
+                for (Order order : list){
+                    if (order.getProductName().equalsIgnoreCase(book1.getName())&&order.getNote().equalsIgnoreCase("confirm loan")){
+                        amount++;
+                    }
+                }
+            }
+
+        }
+        if (count > 2||amount>0) {
+            if (amount>0){
+                System.out.println("you have not returned this product");
+            }else {
+                System.out.println("Order list less than 3 items");
+            }
+        } else {
+            do {
+                for (Book book : produceService.findAll()) {
+                    if (book.getID().equals(id)) {
+                        for (Order order : loanList) {
+                            if (book.getName().equalsIgnoreCase(order.getProductName()) && order.getNote().equalsIgnoreCase("loan") && callUser().getUserName().equalsIgnoreCase(order.getUserNameOrder())
+                                    || book.getName().equalsIgnoreCase(order.getProductName()) && order.getNote().equalsIgnoreCase("confirm loan") && callUser().getUserName().equalsIgnoreCase(order.getUserNameOrder())) {
+                                System.out.println("This Item isready in Loan list");
+                                return;
+                            }
+                        }
+                        System.out.println(InstantUtils.productFomat(book));
+                        if (AppUtils.areYouSure("Add product to loan list")) {
+                            Order order = new Order();
+                            order.setID(System.currentTimeMillis() / 1000);
+                            order.setProductName(book.getName());
+                            order.setQuaility(1);
+                            order.setPrice(book.getPrice());
+                            order.setUserNameOrder(callUser().getUserName());
+                            order.setAddressOfUser(callUser().getAddress());
+                            order.setPhoneNumberOfUser(callUser().getMobile());
+                            order.setCreateAt(Instant.now());
+                            order.setNote("Loan");
+                            loanList.add(order);
+                            CSVUtils.write(PATHLOAN, loanList);
+                            System.out.println("Add product is succes.");
                             return;
                         }
                     }
-                    System.out.println(InstantUtils.productFomat(book));
-                    if (AppUtils.areYouSure("Add product to loan list")) {
-                        Order order = new Order();
-                        order.setID(System.currentTimeMillis() / 1000);
-                        order.setProductName(book.getName());
-                        order.setQuaility(1);
-                        order.setPrice(book.getPrice());
-                        order.setUserNameOrder(callUser().getUserName());
-                        order.setAddressOfUser(callUser().getAddress());
-                        order.setPhoneNumberOfUser(callUser().getMobile());
-                        order.setCreateAt(Instant.now());
-                        order.setNote("Loan");
-                        loanList.add(order);
-                        CSVUtils.write(PATHLOAN, loanList);
-                        System.out.println("Add product is succes.");
-                        return;
-                    }
                 }
-            }
-            System.out.println("Cant find this ID, please check again.");
-            isready = AppUtils.areYouSure("Add more Product");
-            List<Order> revenueList = new ArrayList<>();
-            for (String s : CSVUtils.read(PATHLOAN)) {
-                revenueList.add(Order.parseOrder(s));
-            }
-            for (Order order : revenueList) {
-                if (order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName()) && order.getNote().equalsIgnoreCase("confirm loan")) {
-                    isready = false;
-                    return;
+                System.out.println("Cant find this ID, please check again.");
+                isready = AppUtils.areYouSure("Add more Product");
+                List<Order> revenueList = new ArrayList<>();
+                for (String s : CSVUtils.read(PATHLOAN)) {
+                    revenueList.add(Order.parseOrder(s));
                 }
-            }
-            for (Order order : loanList) {
-                int count = 0;
-                if (order.getNote().equalsIgnoreCase("loan")) {
-                    count += 1;
-                    if (count > 2) {
-                        System.out.println("Loan is less than 3 items.");
+                for (Order order : revenueList) {
+                    if (order.getUserNameOrder().equalsIgnoreCase(callUser().getUserName()) && order.getNote().equalsIgnoreCase("confirm loan")) {
                         isready = false;
                         return;
                     }
                 }
-            }
-        } while (isready);
+            } while (isready);
+        }
     }
 
     @Override
@@ -133,7 +152,10 @@ public class LoanProductService implements ILoanProduct {
             }
         }
         if (count == 0) {
-            System.err.println("Loan list is empty.");
+            System.out.println("Loan list is empty.");
+        } else {
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
         }
     }
 
@@ -158,7 +180,7 @@ public class LoanProductService implements ILoanProduct {
             }
 
             if (count == 0) {
-                System.err.println("Order list is empty, please add product to list.");
+                System.out.println("Order list is empty, please add product to list.");
             } else {
                 System.out.println("Complete!");
             }
@@ -182,7 +204,9 @@ public class LoanProductService implements ILoanProduct {
             }
         }
         if (count == 0) {
-            System.err.println("Loanding is empty");
+            System.out.println("Loanding is empty");
+        } else {
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         }
     }
 
